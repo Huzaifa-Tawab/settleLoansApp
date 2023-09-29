@@ -1,0 +1,337 @@
+.theme-btn {
+    background: #004673;
+    border-color: #004673;
+    border-radius: 10px;
+}
+
+.theme-btn:hover {
+    color: white !important;
+    background: #004673;
+    border-color: #004673;
+}
+
+.hero-1 .single-slide .hero-contents h1 span {
+    color: #004673 !important;
+}
+
+.hero-1 .slide-pop-video-box-wrapper {
+
+    background-color: #004673;
+}
+
+.video-play-btn .play-video {
+
+    color: #004673;
+
+}
+
+#scrollUp {
+    background-color: #004673;
+}
+
+#scrollUp:hover {
+    background-color: #fff;
+}
+
+.block-contents .section-title>span {
+    text-transform: capitalize;
+    color: #9d9494;
+    font-family: "Lexend", sans-serif;
+}
+
+.block-contents .section-title>span::before {
+    background-color: #9d9494;
+}
+
+.service-single-card-item .content .service-cat a {
+
+    background-color: #004673;
+
+}
+
+.block-contents .section-title h2 span {
+    color: #004673;
+}
+
+a {
+    color: #004673;
+}
+
+.core-features-carousel .single-features-item .icon {
+
+    color: #004673;
+
+}
+
+.elementor-2155 .elementor-element.elementor-element-66de7a6.elementor-view-stacked .elementor-icon {
+    background-color: #004673 !important;
+
+}
+
+.elementor-2155 .elementor-element.elementor-element-20034a3>.elementor-background-overlay {
+    background-color: #004673 !important;
+}
+
+.single-testimonial-card .client-img::before {
+    background: #004673 !important;
+}
+
+.single-testimonial-card .feedback .star {
+    color: #004673;
+}
+
+.elementor-2155 .elementor-element.elementor-element-2f6dfa91>.elementor-element-populated>.elementor-background-overlay {
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #026aad 0%, #004673 100%) !important;
+
+}
+
+.elementor-2155 .elementor-element.elementor-element-5c46745>.elementor-background-overlay {
+    background-color: #004673 !important;
+    ;
+}
+
+.elementor-2155 .elementor-element.elementor-element-b4dc987.elementor-view-stacked .elementor-icon {
+    background-color: #FFFFFF;
+    color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-b2d3e40 .elementor-button {
+    font-family: "Lexend", Sans-serif;
+    fill: #FFFFFF;
+    color: #FFFFFF;
+    background-color: #004673 !important;
+}
+
+.single-news-card .contents .post-cat a {
+
+
+    background: #004673 !important;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: "Lexend", sans-serif;
+
+}
+
+.single-news-card .content-bottom::before {
+
+    background-color: #007ab8;
+
+}
+
+.single-news-card .thumb {
+
+    background-color: #004673;
+}
+
+
+#hamburger {
+    color: #004673;
+
+}
+
+.elementor-2155 .elementor-element.elementor-element-d9515fd.elementor-view-stacked .elementor-icon {
+    background-color: #FFFFFF;
+    color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-2bbdd10.elementor-view-stacked .elementor-icon {
+    background-color: #004373 !important;
+
+}
+
+.elementor-2155 .elementor-element.elementor-element-cb26ebd.elementor-view-stacked .elementor-icon {
+    background-color: #004373 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-9ec22fe.elementor-view-stacked .elementor-icon {
+    background-color: #004373 !important;
+
+}
+
+.elementor-365 .elementor-element.elementor-element-01f7497:not(.elementor-motion-effects-element-type-background),
+.elementor-365 .elementor-element.elementor-element-01f7497>.elementor-motion-effects-container>.elementor-motion-effects-layer {
+    background-color: #9d9e9e !important;
+}
+
+.elementor-365 .elementor-element.elementor-element-569ba1b .elementor-social-icon {
+    background-color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-95ca27b .block-contents .section-title h2 span {
+    color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-45aeee8 .elementor-icon-list-icon i {
+    color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-68bf739 .elementor-button {
+    font-family: "Lexend", Sans-serif;
+    background-color: #004673 !important;
+}
+
+.elementor-2155 .elementor-element.elementor-element-68bf739 .elementor-button:hover {
+    transform: scale(1.02);
+    color: white !important;
+    background-color: #007ab8 !important;
+}
+
+.single-news-card .content-bottom .read-more-btn {
+
+    background: #007ab8;
+
+}
+
+footer .footer-bottom .bottom-content-wrapper {
+    background-color: #212327;
+
+}
+
+footer .footer-bottom {
+    background-color: #212327;
+
+}
+
+.service-item-card-2 .icon {
+
+    background-color: #004673;
+
+}
+
+.contents .read-more-link {
+    color: #004673 !important;
+}
+
+.slick-arrow {
+    border-color: #004673 !important;
+    color: #004673 !important;
+
+}
+
+.slick-arrow:hover {
+    border-color: #212327 !important;
+    background-color: #212327 !important;
+    color: white !important;
+}
+
+.mobile-nav {
+    background-color: #004673;
+}
+
+.mobile-nav .sidebar-nav .metismenu a:hover {
+    background-color: #007ab8;
+
+
+}
+
+.single-news-card:hover .content-bottom .read-more-btn {
+
+    background: #007ab8;
+}
+
+.video-play-btn .play-video:hover {
+    color: #007ab8;
+
+}
+
+a:hover {
+    color: #007ab8 !important;
+}
+
+.core-features-carousel .single-features-item {
+    border-color: #007ab8;
+
+}
+
+.core-features-carousel .single-features-item:hover {
+    border-color: #004673;
+
+}
+
+.page-banner-wrap::before,
+.page-banner-wrap::after {
+    background-color: #004673;
+}
+
+.blog-wrapper .single-blog-post .post-content .post-cat a {
+    background-color: #007ab8;
+}
+
+.blog-wrapper .single-blog-post .post-content .post-cat a:hover {
+    background-color: #004673;
+    color: white !important;
+}
+
+element.style {}
+
+.wp-block-search .wp-block-search__button {
+    background-color: #007ab8;
+
+}
+
+.wp-block-search .wp-block-search__button:hover {
+    background-color: #004673;
+
+}
+
+
+.blog-wrapper .single-blog-post.post-details blockquote {
+    border-left-color: #004673;
+    background: #004673;
+}
+
+.tag-share-wrap .post-tags a {
+    background: #007ab8;
+}
+
+.tag-share-wrap .post-tags a:hover {
+    color: white !important;
+    background: #004673;
+}
+
+.comment-form .submit {
+    background: #007ab8;
+}
+
+.comment-form .submit:hover {
+    background: #004673;
+}
+
+.wpcf7 input[type="url"],
+.wpcf7 input[type="email"],
+.wpcf7 input[type="tel"] {
+    background: #f7f7f7d4;
+    height: 56px;
+    font-size: 15px;
+    color: #666;
+    margin-top: 5px;
+    direction: ltr;
+}
+
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+    background-color: #007ab8;
+    margin-top: 10px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.special-footer-span {
+    color: #004673 !important;
+}
+
+.theme-btn.no-fil: {
+    background: 004673 !important;
+}
+
+.mobile-nav .close-nav {
+
+    left: unset;
+
+    right: 20px;
+}
