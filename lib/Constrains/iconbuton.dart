@@ -5,7 +5,7 @@ import 'package:settle_loans/Constrains/textstyles.dart';
 class KIconButton extends StatelessWidget {
   String title;
   Function onPressed;
-  Widget Img;
+  String Img;
   KIconButton(
       {super.key,
       required this.title,
