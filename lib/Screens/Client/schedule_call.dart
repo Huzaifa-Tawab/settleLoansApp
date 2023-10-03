@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
+import 'package:settle_loans/Components/Popup.dart';
 
 class ScheduleACall extends StatefulWidget {
   const ScheduleACall({Key? key}) : super(key: key);
@@ -114,7 +115,7 @@ class _ScheduleACallState extends State<ScheduleACall> {
                 getBookingStream: getBookingStreamMock,
                 uploadBooking: uploadBookingMock,
                 loadingWidget: const Text('Fetching data...'),
-                uploadingWidget: const CircularProgressIndicator(),
+                uploadingWidget: const Popup(),
                 locale: 'en_EN',
                 startingDayOfWeek: StartingDayOfWeek.monday,
 
