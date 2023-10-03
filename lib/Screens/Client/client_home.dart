@@ -7,9 +7,11 @@ import 'package:settle_loans/Components/icons.dart';
 import 'package:settle_loans/Components/shared_prefs.dart';
 import 'package:settle_loans/Constrains/Buttons.dart';
 import 'package:settle_loans/Constrains/colors.dart';
+import 'package:settle_loans/Constrains/iconbuton.dart';
 import 'package:settle_loans/Constrains/textstyles.dart';
 import 'package:settle_loans/Screens/Auth/login.dart';
 import 'package:settle_loans/Screens/Client/client_data.dart';
+import 'package:settle_loans/Screens/Client/paymentgateway.dart';
 import 'package:settle_loans/Screens/Client/schedule_call.dart';
 
 class ClientHome extends StatefulWidget {
@@ -217,7 +219,7 @@ class _ClientHomeState extends State<ClientHome> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: 230,
+                            width: 200,
                             child: Text.rich(
                               TextSpan(
                                 children: [
@@ -257,7 +259,12 @@ class _ClientHomeState extends State<ClientHome> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                                   Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Paymentgateway()),
+              );
+                            },
                             child: Icon(Icons.arrow_forward),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
@@ -303,6 +310,9 @@ class _ClientHomeState extends State<ClientHome> {
                           ],
                         ),
                       ),
+                      
+                     KIconButton(title: 'Debt free solutions', onPressed: (){}, Img: ''),
+                     KIconButton(title: 'ok', onPressed: (){}, Img: ''),
                 ElevatedButton(onPressed: LogoutHandler, child: Text('Logout')),
               ],
             ),
