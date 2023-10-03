@@ -89,7 +89,7 @@ class _ClientHomeState extends State<ClientHome> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                           Text(
                             '${userDetails['name']}',
                             style: HeadingTextStyle3(),
                           ),

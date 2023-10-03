@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:settle_loans/Components/icons.dart';
 import 'package:settle_loans/Constrains/textstyles.dart';
 
+// ignore: must_be_immutable
 class KIconButton extends StatelessWidget {
   String title;
   Function onPressed;
