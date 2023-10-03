@@ -39,8 +39,8 @@ class _ClientHomeState extends State<ClientHome> {
   }
 
   Schedule_A_Call_Handler() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: ((context) => ScheduleACall())));
+    Navigator.push(context,
+        MaterialPageRoute(builder: ((context) => const ScheduleACall())));
   }
 
   LogoutHandler() {
@@ -49,7 +49,7 @@ class _ClientHomeState extends State<ClientHome> {
       RemoveStoreData('userDetails');
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
           (Route<dynamic> route) => false);
     });
   }
@@ -72,14 +72,14 @@ class _ClientHomeState extends State<ClientHome> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(300),
+          preferredSize: const Size.fromHeight(300),
           child: AppBar(
             backgroundColor: Black,
             flexibleSpace: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   Row(
@@ -105,7 +105,7 @@ class _ClientHomeState extends State<ClientHome> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextField(
@@ -115,7 +115,7 @@ class _ClientHomeState extends State<ClientHome> {
                       hintText: 'Search...',
                       // Add a clear button to the search bar
                       suffixIcon: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.search,
                           color: Black,
                         ),
@@ -129,7 +129,7 @@ class _ClientHomeState extends State<ClientHome> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Row(
@@ -137,11 +137,11 @@ class _ClientHomeState extends State<ClientHome> {
                     children: [
                       ButtonWithIcon(
                         leading: Container(
-                          padding: EdgeInsets.all(8),
-                          margin: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.only(right: 10),
                           width: 40,
                           height: 40,
-                          decoration: ShapeDecoration(
+                          decoration: const ShapeDecoration(
                             color: Color(0xFFFFFCF3),
                             shape: OvalBorder(),
                           ),
@@ -152,17 +152,17 @@ class _ClientHomeState extends State<ClientHome> {
                         fontSize: 10,
                         borderWidth: 0.2,
                         radius: 20,
-                        textColor: Color(0xFFAAAAAA),
+                        textColor: const Color(0xFFAAAAAA),
                         onPressed: Schedule_A_Call_Handler,
                         color: Colors.transparent,
                       ),
                       ButtonWithIcon(
                         leading: Container(
-                          padding: EdgeInsets.all(8),
-                          margin: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.only(right: 10),
                           width: 40,
                           height: 40,
-                          decoration: ShapeDecoration(
+                          decoration: const ShapeDecoration(
                             color: Color(0xFFFFFCF3),
                             shape: OvalBorder(),
                           ),
@@ -173,7 +173,7 @@ class _ClientHomeState extends State<ClientHome> {
                         fontSize: 10,
                         borderWidth: 0.2,
                         radius: 20,
-                        textColor: Color(0xFFAAAAAA),
+                        textColor: const Color(0xFFAAAAAA),
                         onPressed: () {},
                         color: Colors.transparent,
                       )
@@ -189,13 +189,13 @@ class _ClientHomeState extends State<ClientHome> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: ShapeDecoration(
-                    color: Color(0xFFFFDC60),
+                    color: const Color(0xFFFFDC60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -211,7 +211,7 @@ class _ClientHomeState extends State<ClientHome> {
                         "Lets us set up a call with your financial advisor.",
                         style: PrimaryTextStyle(),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -260,15 +260,17 @@ class _ClientHomeState extends State<ClientHome> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                                   Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Paymentgateway()),
-              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const Paymentgateway()),
+                              );
                             },
-                            child: Icon(Icons.arrow_forward),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
-                                shape: StadiumBorder()),
+                                shape: const StadiumBorder()),
+                            child: const Icon(Icons.arrow_forward),
                           )
                         ],
                       )
@@ -284,7 +286,7 @@ class _ClientHomeState extends State<ClientHome> {
                 ),
                 // Horizontal Scroll Container
                 myServices
-                    ? Container(
+                    ? const SizedBox(
                         height: 100, // Adjust the height as needed
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -293,14 +295,14 @@ class _ClientHomeState extends State<ClientHome> {
                           ),
                         ),
                       )
-                    : Container(
+                    : SizedBox(
                         height: 100, // Adjust the height as needed
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             IconNothing,
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -310,10 +312,57 @@ class _ClientHomeState extends State<ClientHome> {
                           ],
                         ),
                       ),
-                      
-                     KIconButton(title: 'Debt free solutions', onPressed: (){}, Img: ''),
-                     KIconButton(title: 'ok', onPressed: (){}, Img: ''),
-                ElevatedButton(onPressed: LogoutHandler, child: Text('Logout')),
+
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    KIconButton(
+                        title: 'Debt free \nsolutions',
+                        onPressed: () {},
+                        Img: Test),
+                    KIconButton(
+                      title: 'Personal loan\nsettlement',
+                      onPressed: () {},
+                      Img: Iconsettlement,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    KIconButton(
+                        title: 'Anti\n-harassment\nservices',
+                        onPressed: () {},
+                        Img: IconHaressment),
+                    KIconButton(
+                      title: 'Credit card\nsettlement',
+                      onPressed: () {},
+                      Img: Iconsettlement,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    KIconButton(
+                      title: 'Settlement &\nforeclosure',
+                      onPressed: () {},
+                      Img: Iconfile,
+                    ),
+                  ],
+                ),
+
+                ElevatedButton(
+                    onPressed: LogoutHandler, child: const Text('Logout')),
               ],
             ),
           ),

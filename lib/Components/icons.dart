@@ -25,3 +25,23 @@ final Widget IconNothing = SvgPicture.asset(
   'assets/nothing.svg',
   semanticsLabel: 'Nothing Icon',
 );
+final Widget Test = SvgPicture.asset(
+  'assets/test.svg',
+  semanticsLabel: 'Nothing Icon',
+);
+final Widget IconHaressment = SvgPicture.asset(
+  'assets/anti-harrasment.svg',
+  semanticsLabel: 'Harrasment Icon',
+);
+final Widget Iconsettlement = SvgPicture.asset(
+  'assets/settlement.svg',
+  semanticsLabel: 'settlement Icon',
+);
+final Widget Iconcreditcard = SvgPicture.asset(
+  'assets/credit-card.svg',
+  semanticsLabel: 'Nothing Icon',
+);
+final Widget Iconfile = SvgPicture.asset(
+  'assets/file.svg',
+  semanticsLabel: 'file Icon',
+);

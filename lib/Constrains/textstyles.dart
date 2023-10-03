@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 // Primary Text Style
 TextStyle PrimaryTextStyle() {
   return TextStyle(
-    color: Color(0xFF232323),
+    color: const Color(0xFF232323),
     fontSize: 14,
     fontFamily: GoogleFonts.rubik().fontFamily,
     fontWeight: FontWeight.w600,
@@ -25,7 +25,7 @@ TextStyle HeadingTextStyle1() {
 
 TextStyle HeadingTextStyle2() {
   return TextStyle(
-    color: Color(0xFF232323),
+    color: const Color(0xFF232323),
     fontSize: 20,
     fontFamily: GoogleFonts.poppins().fontFamily,
     fontWeight: FontWeight.w600,
@@ -46,7 +46,7 @@ TextStyle HeadingTextStyle3() {
 
 TextStyle ParaTextStyle1() {
   return TextStyle(
-    color: Color(0xFF636363),
+    color: const Color(0xFF636363),
     fontSize: 16,
     fontFamily: GoogleFonts.rubik().fontFamily,
     fontWeight: FontWeight.w400,
@@ -57,7 +57,7 @@ TextStyle ParaTextStyle1() {
 // TextField Labels Text Style
 TextStyle LabelTextStyle1() {
   return TextStyle(
-    color: Color(0xFF636363),
+    color: const Color(0xFF636363),
     fontSize: 16,
     fontFamily: GoogleFonts.rubik().fontFamily,
     fontWeight: FontWeight.w600,
@@ -67,10 +67,19 @@ TextStyle LabelTextStyle1() {
 
 TextStyle LabelTextStyle2() {
   return TextStyle(
-    color: Color(0xFF636363),
+    color: const Color(0xFF636363),
     fontSize: 12,
     fontFamily: GoogleFonts.rubik().fontFamily,
     fontWeight: FontWeight.w400,
     height: 0.18,
+  );
+}
+
+TextStyle LabelTextStyle3() {
+  return TextStyle(
+    color: const Color(0xFF232323),
+    fontSize: 12,
+    fontFamily: GoogleFonts.rubik().fontFamily,
+    fontWeight: FontWeight.w500,
   );
 }
