@@ -125,14 +125,15 @@ class Containerbutton extends StatelessWidget {
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration( border: Border.all(),),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 100,
-            height: 20,
-            child: icons,
-            // decoration: BoxDecoration(image: DecorationImage(image: AssetImage('Vector.png'))),
-            ),
+          icons
+          
+          ,
+          SizedBox(width: 10,),
       Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(text,style: HeadingTextStyle2(),),
