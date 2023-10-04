@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:settle_loans/Components/icons.dart';
 import 'package:settle_loans/Constrains/textstyles.dart';
+import 'package:settle_loans/Screens/Client/services.dart';
 
 // ignore: must_be_immutable
 class KIconButton extends StatelessWidget {
   String title;
-  Function onPressed;
+ 
   Widget Img;
   KIconButton(
       {super.key,
       required this.title,
-      required this.onPressed,
+    
       required this.Img});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed(),
+      onTap: (){
+         Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const ServicesPage()),
+  );
+                  
+      },
       child: Container(
         padding: const EdgeInsets.all(8),
         height: 80,
@@ -34,7 +41,7 @@ class KIconButton extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(height: 50, width: 50, child: Img),
             Text(

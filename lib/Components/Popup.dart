@@ -18,16 +18,16 @@ class Popup extends StatelessWidget {
           ),
         ],
       ),
-      margin: EdgeInsets.symmetric(horizontal: 80, vertical: 250),
+      margin: EdgeInsets.symmetric(horizontal: 80, vertical: 180),
       height: 400,
       width: 300,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset('assets/CheckCircle.png'),
-          SizedBox(
-            height: 10,
-          ),
+          // SizedBox(
+          //   height: 10,
+          // ),
           Divider(
             endIndent: 20,
             indent: 20,

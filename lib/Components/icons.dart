@@ -39,9 +39,26 @@ final Widget Iconsettlement = SvgPicture.asset(
 );
 final Widget Iconcreditcard = SvgPicture.asset(
   'assets/credit-card.svg',
-  semanticsLabel: 'Nothing Icon',
+  semanticsLabel: 'credit card Icon',
+);
+final Widget creditcard = SvgPicture.asset(
+  'assets/creditcardsvg.svg',
+  semanticsLabel: 'credit card Icon',
+);
+
+
+
+final Widget netbanking = SvgPicture.asset(
+  'assets/netbaking.svg',
+  semanticsLabel: 'Net Banking Icon',
+);final Widget Iconwallet = SvgPicture.asset(
+  'assets/wallet.svg',
+  semanticsLabel: 'Wallet Icon',
 );
 final Widget Iconfile = SvgPicture.asset(
   'assets/file.svg',
   semanticsLabel: 'file Icon',
+);final Widget lawpicture = SvgPicture.asset(
+  'assets/law.svg',
+  semanticsLabel: 'Law Icon',
 );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ import 'package:settle_loans/Screens/Auth/login.dart';
 import 'package:settle_loans/Screens/Client/client_data.dart';
 import 'package:settle_loans/Screens/Client/paymentgateway.dart';
 import 'package:settle_loans/Screens/Client/schedule_call.dart';
+import 'package:settle_loans/Screens/Client/services.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({super.key});
@@ -321,11 +324,11 @@ class _ClientHomeState extends State<ClientHome> {
                   children: [
                     KIconButton(
                         title: 'Debt free \nsolutions',
-                        onPressed: () {},
+                       
                         Img: Test),
                     KIconButton(
                       title: 'Personal loan\nsettlement',
-                      onPressed: () {},
+                    
                       Img: Iconsettlement,
                     ),
                   ],
@@ -338,12 +341,12 @@ class _ClientHomeState extends State<ClientHome> {
                   children: [
                     KIconButton(
                         title: 'Anti\n-harassment\nservices',
-                        onPressed: () {},
+                      
                         Img: IconHaressment),
                     KIconButton(
                       title: 'Credit card\nsettlement',
-                      onPressed: () {},
-                      Img: Iconsettlement,
+                 
+                      Img: Iconcreditcard,
                     ),
                   ],
                 ),
@@ -355,7 +358,9 @@ class _ClientHomeState extends State<ClientHome> {
                   children: [
                     KIconButton(
                       title: 'Settlement &\nforeclosure',
-                      onPressed: () {},
+                     
+  
+
                       Img: Iconfile,
                     ),
                   ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:settle_loans/Constrains/textstyles.dart';
+// import 'package:settle_loans/Constrains/textstyles.dart';
 
 class RoundedButton1 extends StatelessWidget {
   final String text;
@@ -101,49 +101,6 @@ class ButtonWithIcon extends StatelessWidget {
             action
           ],
         ),
-      ),
-    );
-  }
-}
-
-class Containerbutton extends StatelessWidget {
-  final String text;
-  final String text2;
-  final Function onPressed;
-  final icons;
-
-  const Containerbutton(
-      {super.key, required this.text, required this.icons,required this.text2, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-
-      child: Container(
-        height: 100,
-      width:MediaQuery.sizeOf(context).width,
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration( border: Border.all(),),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          icons
-          
-          ,
-          SizedBox(width: 10,),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(text,style: HeadingTextStyle2(),),
-          Text(text2,style: ParaTextStyle1(),
-          )
-          ],
-          )
-          ],
-          ),
-      
       ),
     );
   }
