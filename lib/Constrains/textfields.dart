@@ -6,12 +6,14 @@ class TextField_1 extends StatelessWidget {
   final String label;
   final String hint;
   final bool obscure;
+  final txttype;
 
   const TextField_1(
       {super.key,
       required this.controller,
       required this.label,
       this.obscure = false,
+      this.txttype,
       this.hint = ''});
 
   @override
@@ -26,14 +28,16 @@ class TextField_1 extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        TextField(
+        TextFormField(
           obscureText: obscure,
           style: TextStyle(),
           decoration: InputDecoration(
               border: OutlineInputBorder(
                   borderSide: BorderSide(width: 0.50, color: Color(0xFFBEBEBE)),
                   borderRadius: BorderRadius.circular(12)),
+                  
               hintText: hint),
+              keyboardType: txttype,
           controller: controller,
         )
       ],

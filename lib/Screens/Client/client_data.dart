@@ -35,57 +35,61 @@ class ClientDataScreen1 extends StatelessWidget {
         title: LogoBlack,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    'Step 1 of 3',
-                    style: LabelTextStyle1(),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Let us get to know you.',
-                    style: HeadingTextStyle2(),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      'Step 1 of 3',
+                      style: LabelTextStyle1(),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Let us get to know you.',
+                      style: HeadingTextStyle2(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            TextField_1(
-              controller: _nameController,
-              label: 'Name',
-              hint: 'Name',
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            TextField_1(
-              controller: _PhoneController,
-              label: 'Phone No.',
-              hint: '91 XXXXXXXXXX',
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 60,
-                child: RoundedButton1(
-                    text: 'Next Step', onPressed: onButtonPressed)),
-          ],
+              SizedBox(
+                height: 100,
+              ),
+              TextField_1(
+                controller: _nameController,
+                txttype: TextInputType.name,
+                label: 'Name',
+                hint: 'Name',
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              TextField_1(
+                controller: _PhoneController,
+                txttype: TextInputType.number,
+                label: 'Phone No.',
+                hint: '91 XXXXXXXXXX',
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 60,
+                  child: RoundedButton1(
+                      text: 'Next Step', onPressed: onButtonPressed)),
+            ],
+          ),
         ),
       ),
     );
@@ -114,57 +118,61 @@ class ClientDataScreen2 extends StatelessWidget {
         title: LogoBlack,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text(
-                    'Step 2 of 3',
-                    style: LabelTextStyle1(),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Help us understand you better.',
-                    style: HeadingTextStyle2(),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      'Step 2 of 3',
+                      style: LabelTextStyle1(),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Help us understand you better.',
+                      style: HeadingTextStyle2(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            TextField_1(
-              controller: _DebtController,
-              label: 'Total Debt Amount',
-              hint: '50,000',
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            TextField_1(
-              controller: _IncomeController,
-              label: 'Monthly Income',
-              hint: '25,000',
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 60,
-                child: RoundedButton1(
-                    text: 'Next Step', onPressed: onButtonPressed)),
-          ],
+              SizedBox(
+                height: 100,
+              ),
+              TextField_1(
+                controller: _DebtController,
+                txttype: TextInputType.number,
+                label: 'Total Debt Amount',
+                hint: '50,000',
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              TextField_1(
+                controller: _IncomeController,
+                txttype: TextInputType.number,
+                label: 'Monthly Income',
+                hint: '25,000',
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 60,
+                  child: RoundedButton1(
+                      text: 'Next Step', onPressed: onButtonPressed)),
+            ],
+          ),
         ),
       ),
     );
@@ -221,108 +229,110 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
         title: LogoBlack,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      'Step 3 of 3',
+                      style: LabelTextStyle1(),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Almost Done!',
+                      style: HeadingTextStyle2(),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                'Can you arrange Rs.2,000 - Rs.3,000 to start the settlement process?',
+                style: LabelTextStyle1(),
+              ),
+              Row(
                 children: [
-                  SizedBox(
-                    height: 40,
-                  ),
+                  Radio(
+                      activeColor: Yellow,
+                      value: true,
+                      groupValue: startprocess,
+                      onChanged: (e) {
+                        setStartProcess(e);
+                      }),
                   Text(
-                    'Step 3 of 3',
-                    style: LabelTextStyle1(),
+                    'Yes',
+                    style: LabelTextStyle2(),
                   ),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  Radio(
+                      activeColor: Yellow,
+                      value: false,
+                      groupValue: startprocess,
+                      onChanged: (e) {
+                        setStartProcess(e);
+                      }),
                   Text(
-                    'Almost Done!',
-                    style: HeadingTextStyle2(),
+                    'No',
+                    style: LabelTextStyle2(),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            Text(
-              'Can you arrange Rs.2,000 - Rs.3,000 to start the settlement process?',
-              style: LabelTextStyle1(),
-            ),
-            Row(
-              children: [
-                Radio(
-                    activeColor: Yellow,
-                    value: true,
-                    groupValue: startprocess,
-                    onChanged: (e) {
-                      setStartProcess(e);
-                    }),
-                Text(
-                  'Yes',
-                  style: LabelTextStyle2(),
-                ),
-                Radio(
-                    activeColor: Yellow,
-                    value: false,
-                    groupValue: startprocess,
-                    onChanged: (e) {
-                      setStartProcess(e);
-                    }),
-                Text(
-                  'No',
-                  style: LabelTextStyle2(),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Text(
-              'Are you facing harassment by recovery agent / banks ?',
-              style: LabelTextStyle1(),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Radio(
-                    activeColor: Yellow,
-                    value: true,
-                    groupValue: harasment,
-                    onChanged: (e) {
-                      setHarasment(e);
-                    }),
-                Text(
-                  'Yes',
-                  style: LabelTextStyle2(),
-                ),
-                Radio(
-                    activeColor: Yellow,
-                    value: false,
-                    groupValue: harasment,
-                    onChanged: (e) {
-                      setHarasment(e);
-                    }),
-                Text(
-                  'No',
-                  style: LabelTextStyle2(),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 100,
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 60,
-                child: RoundedButton1(
-                    text: 'Next Step', onPressed: onButtonPressed)),
-          ],
+              SizedBox(
+                height: 35,
+              ),
+              Text(
+                'Are you facing harassment by recovery agent / banks ?',
+                style: LabelTextStyle1(),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Radio(
+                      activeColor: Yellow,
+                      value: true,
+                      groupValue: harasment,
+                      onChanged: (e) {
+                        setHarasment(e);
+                      }),
+                  Text(
+                    'Yes',
+                    style: LabelTextStyle2(),
+                  ),
+                  Radio(
+                      activeColor: Yellow,
+                      value: false,
+                      groupValue: harasment,
+                      onChanged: (e) {
+                        setHarasment(e);
+                      }),
+                  Text(
+                    'No',
+                    style: LabelTextStyle2(),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 60,
+                  child: RoundedButton1(
+                      text: 'Next Step', onPressed: onButtonPressed)),
+            ],
+          ),
         ),
       ),
     );

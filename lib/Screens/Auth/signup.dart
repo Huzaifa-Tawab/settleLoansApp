@@ -156,6 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ]),
               TextField_1(
                 controller: _EmailController,
+                txttype: TextInputType.emailAddress,
                 label: 'Email',
               ),
               const SizedBox(
@@ -163,6 +164,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               TextField_1(
                 controller: _PasswordController,
+                txttype: TextInputType.visiblePassword,
                 label: 'Password ',
                 obscure: true,
               ),

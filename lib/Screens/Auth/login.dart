@@ -151,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
               TextField_1(
                 controller: _EmailController,
+                txttype: TextInputType.emailAddress,
                 label: 'Email',
               ),
               const SizedBox(
@@ -158,6 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextField_1(
                 controller: _PasswordController,
+                txttype: TextInputType.visiblePassword,
                 label: 'Password ',
                 obscure: true,
               ),

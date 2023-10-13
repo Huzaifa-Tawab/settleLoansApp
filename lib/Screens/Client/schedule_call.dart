@@ -317,14 +317,13 @@ class _ScheduleACallState extends State<ScheduleACall> {
                 // bookedSlotTextStyle: LabelTextStyle1(),
                 availableSlotColor:  Color.fromARGB(255, 255, 252, 243),
                 bookedSlotColor:  Color.fromARGB(255, 255, 249, 230),
-                
                 selectedSlotColor: Yellow,
                 bookingService: callServiceBooking!,
                 convertStreamResultToDateTimeRanges: convertStreamResultMock,
                 getBookingStream: getBookingStreamMock,
                 uploadBooking: uploadBookingMock,
                 loadingWidget: const Text('Fetching data...'),
-                uploadingWidget: Popup(),
+                uploadingWidget: null,
                 locale: 'en_EN',
                 startingDayOfWeek: StartingDayOfWeek.monday,
 
