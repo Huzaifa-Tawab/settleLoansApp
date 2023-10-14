@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, unused_import
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:settle_loans/Components/icons.dart';
