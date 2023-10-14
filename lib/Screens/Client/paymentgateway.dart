@@ -3,7 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:settle_loans/Components/icons.dart';
 import 'package:settle_loans/Constrains/Buttons.dart';
 import 'package:settle_loans/Constrains/textstyles.dart';
-
+import 'package:settle_loans/Screens/Client/client_home.dart';
+bool _isCardChecked = false;
+bool _isnetBChecked = false;
+bool _isWalletChecked = false;
 class Paymentgateway extends StatefulWidget {
   const Paymentgateway({super.key});
 
@@ -12,6 +15,20 @@ class Paymentgateway extends StatefulWidget {
 }
 
 class _PaymentgatewayState extends State<Paymentgateway> {
+  bool ispayactived = false;
+   @override
+  
+  void initState() {
+     
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      _isCardChecked = false;
+ _isnetBChecked = false;
+ _isWalletChecked = false;
+    });
+  }
+
   @override
    Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +78,12 @@ class _PaymentgatewayState extends State<Paymentgateway> {
             
             
              onPressed: () {
-              showDataAlert(context);
+              setState(() {
+               ispayactived? showDataAlert(context):null;
+
+                
+              });
+              
              },
      
            child: Text("Pay Now", style: TextStyle(
@@ -71,7 +93,7 @@ class _PaymentgatewayState extends State<Paymentgateway> {
           fontWeight: FontWeight.w600,
           height: 1.60,
         ),), style: TextButton.styleFrom(
-        backgroundColor: const Color(0xFFFFDC60),
+        backgroundColor: ispayactived?const Color(0xFFFFDC60):Color.fromARGB(255, 99, 97, 93),
         shape: RoundedRectangleBorder(
           side: const BorderSide(width: 0.50, color: Color(0xFF488AD2)),
           borderRadius: BorderRadius.circular(20),
@@ -86,9 +108,35 @@ class _PaymentgatewayState extends State<Paymentgateway> {
           children: [
             Text("Cards, UPI & More",style: HeadingTextStyle1(),),
             SizedBox(height: 20,),
-            Containerbutton(img: creditcard,text: "Card",text2: "Visa, Mastercard, RuPay", onPressed: (){}),
-            Containerbutton(img:Iconwallet,text: "NetBanking",text2: "All Indian banks", onPressed: (){}),
-            Containerbutton(img: Iconwallet,text: "Wallet",text2: "PhonePe & More", onPressed: (){}),
+            PaymentContainer(img: creditcard,text: "Card",text2: "Visa, Mastercard, RuPay",isChecked: _isCardChecked, ontap: (){
+              print("Card");
+               setState(() {
+                  ispayactived=true;
+
+      _isCardChecked = true;
+      _isnetBChecked = false;
+      _isWalletChecked=false;
+    });
+            }),
+            PaymentContainer(img:Iconwallet,text: "NetBanking",text2: "All Indian banks",isChecked: _isnetBChecked, ontap: (){
+                 print("NetBanking");
+                 setState(() {
+                  ispayactived=true;
+    _isCardChecked = false;
+      _isnetBChecked = true;
+      _isWalletChecked=false;
+    });
+            }),
+            PaymentContainer(img: Iconwallet,text: "Wallet",text2: "PhonePe & More",isChecked: _isWalletChecked, ontap: (){
+                 print("Wallet");
+                 setState(() {
+  _isCardChecked = false;
+                  ispayactived=true;
+
+      _isnetBChecked = false;
+      _isWalletChecked=true;
+    });
+            }),
           ],
         ),
       ),
@@ -97,45 +145,61 @@ class _PaymentgatewayState extends State<Paymentgateway> {
 }
 
 
-class Containerbutton extends StatelessWidget {
+class PaymentContainer extends StatelessWidget {
   final String text;
   final String text2;
-  final Function onPressed;
+  final Function ontap;
+  final isChecked;
   Widget img;
 
-   Containerbutton(
-      {super.key, required this.text, required this.img,required this.text2, required this.onPressed});
+   PaymentContainer(
+      {super.key, required this.text, required this.img,required this.text2, required this.ontap,required this.isChecked});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+    onTap: () {
+    ontap();
+    
+    },
       
-      child: Container(
+      child: 
+           Container(
         margin: EdgeInsets.all(5),
         height: 100,
       width:MediaQuery.sizeOf(context).width,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration( border: Border.all(),),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:  Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(height: 50,width: 50,
-          child: img,)
-          
-          ,
-          SizedBox(width: 10,),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(text,style: HeadingTextStyle2(),),
-          Text(text2,style: ParaTextStyle1(),
-          )
-          ],
-          )
-          ],
-          ),
+        
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 50,width: 50,
+              child: img,)
+              
+              ,
+              SizedBox(width: 10,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(text,style: HeadingTextStyle2(),),
+              Text(text2,style: ParaTextStyle1(),
+              )
+              ],
+              )
+              ],
+              ) ,isChecked? Icon(
+                Icons.check,
+                color: Color.fromARGB(255, 141, 5, 5),
+              )
+            : SizedBox(),
+        ],
+      ),
       
       ),
     );
@@ -179,7 +243,15 @@ showDataAlert(context) {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: TextButton(
-                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      onPressed: () {
+                                        // Navigator.pop(context);
+                                        Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>ClientHome()),
+                                              (route) => false
+                                        );
+                                        
+                                      },
                                       child: const Text('OK'),
                                     ),
                       ),
