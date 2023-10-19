@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:settle_loans/Constrains/Buttons.dart';
-import 'package:settle_loans/Constrains/colors.dart';
-import 'package:settle_loans/Constrains/textstyles.dart';
-import 'package:settle_loans/Screens/Client/client_home.dart';
+import '/Constrains/Buttons.dart';
+import '/Constrains/colors.dart';
+import '/Constrains/textstyles.dart';
+import '/Screens/Client/client_home.dart';
 import '../../Components/icons.dart';
 import '../../Constrains/textfields.dart';
 

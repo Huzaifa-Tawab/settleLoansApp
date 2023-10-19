@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:settle_loans/Components/shared_prefs.dart';
-import 'package:settle_loans/Screens/Auth/login.dart';
-import 'package:settle_loans/Screens/Auth/signup.dart';
-import 'package:settle_loans/Screens/Client/client_home.dart';
+import '/Components/shared_prefs.dart';
+import '/Screens/Auth/login.dart';
+import '/Screens/Auth/signup.dart';
+import '/Screens/Client/client_home.dart';
 import '/Screens/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {

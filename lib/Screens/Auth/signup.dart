@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:settle_loans/Components/icons.dart';
-import 'package:settle_loans/Components/shared_prefs.dart';
-import 'package:settle_loans/Screens/Auth/login.dart';
-import 'package:settle_loans/Screens/Client/client_data.dart';
-import 'package:settle_loans/Screens/Client/client_home.dart';
+import '/Components/icons.dart';
+import '/Components/shared_prefs.dart';
+import '/Screens/Auth/login.dart';
+import '/Screens/Client/client_data.dart';
+import '/Screens/Client/client_home.dart';
 
 import '/Constrains/Buttons.dart';
 import '/Constrains/colors.dart';

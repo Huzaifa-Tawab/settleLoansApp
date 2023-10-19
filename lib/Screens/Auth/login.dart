@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:settle_loans/Screens/Auth/signup.dart';
+import '/Screens/Auth/signup.dart';
 import '../../Components/shared_prefs.dart';
 import '../../Constrains/textstyles.dart';
 import '../Client/client_data.dart';

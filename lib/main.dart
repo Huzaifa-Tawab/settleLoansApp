@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:settle_loans/Screens/Client/client_data.dart';
-import 'package:settle_loans/Screens/Client/paymentgateway.dart';
-import 'package:settle_loans/Screens/Client/services.dart';
+// import 'package:settle_loans/Screens/Client/client_data.dart';
+// import 'package:settle_loans/Screens/Client/paymentgateway.dart';
+// import 'package:settle_loans/Screens/Client/services.dart';
 import '/Constrains/colors.dart';
 import '/Screens/splashscreen.dart';
 import 'firebase_options.dart';

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "637492759790-rp1ia19fcbpucnij4v0m1vtb1g9a4to0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.settle_loans",
+            "certificate_hash": "ea423b5e22c6d1cbb8805b90ae257074c147a304"
+          }
+        },
+        {
           "client_id": "637492759790-n6k2f9jsnro9sc5ul7i9ja31h1nrsc3f.apps.googleusercontent.com",
           "client_type": 3
         }

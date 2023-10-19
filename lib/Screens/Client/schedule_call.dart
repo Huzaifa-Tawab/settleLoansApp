@@ -139,7 +139,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:settle_loans/Components/Popup.dart';
+// import 'package:settle_loans/Components/Popup.dart';
 import 'package:settle_loans/Constrains/colors.dart';
 import 'package:settle_loans/Constrains/textstyles.dart';
 import 'package:settle_loans/Screens/Client/client_home.dart';
@@ -253,7 +253,7 @@ class _ScheduleACallState extends State<ScheduleACall> {
         centerTitle: true,
         toolbarHeight: 130,
         backgroundColor: Color(0xff000001C),
-        foregroundColor: const Color(0xFFFFFFFF) ,
+        foregroundColor: const Color(0xFFFFFFFF),
         flexibleSpace: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -315,8 +315,8 @@ class _ScheduleACallState extends State<ScheduleACall> {
                 // bookingButtonColor: Yellow,
                 bookingButtonText: 'Confirm Booking',
                 // bookedSlotTextStyle: LabelTextStyle1(),
-                availableSlotColor:  Color.fromARGB(255, 255, 252, 243),
-                bookedSlotColor:  Color.fromARGB(255, 255, 249, 230),
+                availableSlotColor: Color.fromARGB(255, 255, 252, 243),
+                bookedSlotColor: Color.fromARGB(255, 255, 249, 230),
                 selectedSlotColor: Yellow,
                 bookingService: callServiceBooking!,
                 convertStreamResultToDateTimeRanges: convertStreamResultMock,

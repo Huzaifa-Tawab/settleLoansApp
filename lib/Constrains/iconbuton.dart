@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:settle_loans/Components/icons.dart';
-import 'package:settle_loans/Constrains/textstyles.dart';
-import 'package:settle_loans/Screens/Client/services.dart';
+import '/Components/icons.dart';
+import '/Constrains/textstyles.dart';
+import '/Screens/Client/services.dart';
 
 // ignore: must_be_immutable
 class KIconButton extends StatelessWidget {
   String title;
- 
+
   Widget Img;
-  KIconButton(
-      {super.key,
-      required this.title,
-    
-      required this.Img});
+  KIconButton({super.key, required this.title, required this.Img});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-         Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const ServicesPage()),
-  );
-                  
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ServicesPage()),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(8),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:settle_loans/Constrains/colors.dart';
+// import 'package:settle_loans/Constrains/colors.dart';
 
 class Popup extends StatelessWidget {
   const Popup({super.key});

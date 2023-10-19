@@ -46,19 +46,19 @@ final Widget creditcard = SvgPicture.asset(
   semanticsLabel: 'credit card Icon',
 );
 
-
-
 final Widget netbanking = SvgPicture.asset(
   'assets/netbaking.svg',
   semanticsLabel: 'Net Banking Icon',
-);final Widget Iconwallet = SvgPicture.asset(
+);
+final Widget Iconwallet = SvgPicture.asset(
   'assets/wallet.svg',
   semanticsLabel: 'Wallet Icon',
 );
 final Widget Iconfile = SvgPicture.asset(
   'assets/file.svg',
   semanticsLabel: 'file Icon',
-);final Widget lawpicture = SvgPicture.asset(
+);
+final Widget lawpicture = SvgPicture.asset(
   'assets/law.svg',
   semanticsLabel: 'Law Icon',
 );

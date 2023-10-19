@@ -5,17 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:settle_loans/Components/icons.dart';
-import 'package:settle_loans/Components/shared_prefs.dart';
-import 'package:settle_loans/Constrains/Buttons.dart';
-import 'package:settle_loans/Constrains/colors.dart';
-import 'package:settle_loans/Constrains/iconbuton.dart';
-import 'package:settle_loans/Constrains/textstyles.dart';
-import 'package:settle_loans/Screens/Auth/login.dart';
-import 'package:settle_loans/Screens/Client/client_data.dart';
-import 'package:settle_loans/Screens/Client/paymentgateway.dart';
-import 'package:settle_loans/Screens/Client/schedule_call.dart';
-import 'package:settle_loans/Screens/Client/services.dart';
+import '/Components/icons.dart';
+import '/Components/shared_prefs.dart';
+import '/Constrains/Buttons.dart';
+import '/Constrains/colors.dart';
+import '/Constrains/iconbuton.dart';
+import '/Constrains/textstyles.dart';
+import '/Screens/Auth/login.dart';
+import '/Screens/Client/client_data.dart';
+import '/Screens/Client/paymentgateway.dart';
+
+import '/Screens/Client/services.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({super.key});
@@ -41,10 +41,10 @@ class _ClientHomeState extends State<ClientHome> {
     });
   }
 
-  Schedule_A_Call_Handler() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: ((context) => const ScheduleACall())));
-  }
+  // Schedule_A_Call_Handler() {
+  //   Navigator.push(context,
+  //       MaterialPageRoute(builder: ((context) => const ScheduleACall())));
+  // }
 
   LogoutHandler() {
     FirebaseAuth.instance.signOut().then((value) {
@@ -92,7 +92,7 @@ class _ClientHomeState extends State<ClientHome> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             '${userDetails['name']}',
                             style: HeadingTextStyle3(),
                           ),
@@ -156,7 +156,8 @@ class _ClientHomeState extends State<ClientHome> {
                         borderWidth: 0.2,
                         radius: 20,
                         textColor: const Color(0xFFAAAAAA),
-                        onPressed: Schedule_A_Call_Handler,
+                        // onPressed: Schedule_A_Call_Handler,
+                        onPressed: () {},
                         color: Colors.transparent,
                       ),
                       ButtonWithIcon(
@@ -322,13 +323,9 @@ class _ClientHomeState extends State<ClientHome> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    KIconButton(
-                        title: 'Debt free \nsolutions',
-                       
-                        Img: Test),
+                    KIconButton(title: 'Debt free \nsolutions', Img: Test),
                     KIconButton(
                       title: 'Personal loan\nsettlement',
-                    
                       Img: Iconsettlement,
                     ),
                   ],
@@ -341,11 +338,9 @@ class _ClientHomeState extends State<ClientHome> {
                   children: [
                     KIconButton(
                         title: 'Anti\n-harassment\nservices',
-                      
                         Img: IconHaressment),
                     KIconButton(
                       title: 'Credit card\nsettlement',
-                 
                       Img: Iconcreditcard,
                     ),
                   ],
@@ -358,9 +353,6 @@ class _ClientHomeState extends State<ClientHome> {
                   children: [
                     KIconButton(
                       title: 'Settlement &\nforeclosure',
-                     
-  
-
                       Img: Iconfile,
                     ),
                   ],
