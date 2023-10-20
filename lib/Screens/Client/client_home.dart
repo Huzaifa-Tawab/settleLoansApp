@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -12,10 +12,11 @@ import '/Constrains/colors.dart';
 import '/Constrains/iconbuton.dart';
 import '/Constrains/textstyles.dart';
 import '/Screens/Auth/login.dart';
-import '/Screens/Client/client_data.dart';
+// import '/Screens/Client/client_data.dart';
 import '/Screens/Client/paymentgateway.dart';
 
-import '/Screens/Client/services.dart';
+// import '/Screens/Client/services.dart';
+import '/Screens/Client/schedule_call.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({super.key});
@@ -27,6 +28,7 @@ class ClientHome extends StatefulWidget {
 class _ClientHomeState extends State<ClientHome> {
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
+  bool ispayactived=true;
   @override
   void initState() {
     super.initState();
@@ -96,8 +98,10 @@ class _ClientHomeState extends State<ClientHome> {
                             '${userDetails['name']}',
                             style: HeadingTextStyle3(),
                           ),
-                          Text(
-                            'New Member',
+                          
+                          Text(ispayactived?
+                            
+                            'Old Member':"New Member",
                             style: LabelTextStyle1(),
                           ),
                         ],
@@ -138,6 +142,34 @@ class _ClientHomeState extends State<ClientHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      ispayactived?  ButtonWithIcon(
+                        leading: Container(
+                          padding: const EdgeInsets.all(8),
+                          margin: const EdgeInsets.only(right: 10),
+                          width: 40,
+                          height: 40,
+                          decoration: const ShapeDecoration(
+                            color: Color(0xFFFFFCF3),
+                            shape: OvalBorder(),
+                          ),
+                          child: IconPhone,
+                        ),
+                        padding: 10,
+                        text: 'Request a call',
+                        fontSize: 10,
+                        borderWidth: 0.2,
+                        radius: 20,
+                        textColor: const Color(0xFFAAAAAA),
+                        // onPressed: Schedule_A_Call_Handler,
+                        onPressed: () {
+                          showDataAlert(context);
+  //                          Navigator.push(
+  //   context,
+  //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
+  // );
+                        },
+                        color: Colors.transparent,
+                      ):
                       ButtonWithIcon(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
@@ -157,9 +189,15 @@ class _ClientHomeState extends State<ClientHome> {
                         radius: 20,
                         textColor: const Color(0xFFAAAAAA),
                         // onPressed: Schedule_A_Call_Handler,
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const ScheduleACall()),
+  );
+                        },
                         color: Colors.transparent,
                       ),
+  
                       ButtonWithIcon(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
@@ -196,6 +234,7 @@ class _ClientHomeState extends State<ClientHome> {
                 const SizedBox(
                   height: 10,
                 ),
+                ispayactived?SizedBox():
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: ShapeDecoration(
@@ -365,4 +404,55 @@ class _ClientHomeState extends State<ClientHome> {
           ),
         ));
   }
+}
+
+
+showDataAlert(context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                20.0,
+              ),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(
+            top: 10.0,
+          ),
+         
+          content: 
+           Container(
+            height: 250,
+            width: 200,
+             child: Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 Image.asset('assets/CheckCircle.png'),
+                 // SizedBox(
+                 //   height: 10,
+                 // ),
+                 Divider(
+                  thickness: 2,
+                   endIndent: 45,
+                   indent: 45,
+                 ),
+                 Text(
+                     'Thank you for booking\n you will hear from our\n execuitive shortly'),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 20),
+                      //   child: TextButton(
+                      //                 onPressed: () => Navigator.pop(context, 'OK'),
+                      //                 child: const Text('OK'),
+                      //               ),
+                      // ),
+               ],
+             ),
+           ),
+           
+          
+        );
+      });
 }
