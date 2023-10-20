@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:settle_loans/Screens/Client/schedule_call.dart';
 import '/Components/icons.dart';
 import '/Components/shared_prefs.dart';
 import '/Constrains/Buttons.dart';
@@ -25,6 +26,7 @@ class ClientHome extends StatefulWidget {
 }
 
 class _ClientHomeState extends State<ClientHome> {
+  final db = FirebaseFirestore.instance;
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
   @override
@@ -35,12 +37,16 @@ class _ClientHomeState extends State<ClientHome> {
         setState(() {
           userDetails = val;
         });
+        // getdata();
       } else {
         getDataFromDb();
       }
     });
   }
-
+  // getdata()async{
+  //       String uid = FirebaseAuth.instance.currentUser!.uid;
+  //     await db.collection("userDetails").doc(uid).get().then((value) => null);
+  //   }
   // Schedule_A_Call_Handler() {
   //   Navigator.push(context,
   //       MaterialPageRoute(builder: ((context) => const ScheduleACall())));
@@ -67,12 +73,15 @@ class _ClientHomeState extends State<ClientHome> {
       putJson('userDetails', value.data());
       setState(() {
         userDetails = value.data()!;
+        print(userDetails);
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // print();
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(300),
@@ -157,7 +166,13 @@ class _ClientHomeState extends State<ClientHome> {
                         radius: 20,
                         textColor: const Color(0xFFAAAAAA),
                         // onPressed: Schedule_A_Call_Handler,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScheduleACall()),
+                          );
+                        },
                         color: Colors.transparent,
                       ),
                       ButtonWithIcon(
@@ -304,15 +319,13 @@ class _ClientHomeState extends State<ClientHome> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconNothing,
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'No added services',
-                              style: LabelTextStyle2(),
-                            )
+                          children: [
+                            // ...userDetails['services']
+                            //     .map(
+                            //       (service) =>
+                            //           KIconButton(title: service, Img: Test),
+                            //     )
+                            //     .toList()
                           ],
                         ),
                       ),
