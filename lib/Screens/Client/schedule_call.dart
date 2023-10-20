@@ -2,7 +2,10 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 // import 'package:booking_calendar/booking_calendar.dart';
-// import 'package:settle_loans/Components/Popup.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// // import 'package:settle_loans/Components/Popup.dart';
+// import 'package:settle_loans/Constrains/colors.dart';
+// import 'package:settle_loans/Constrains/textstyles.dart';
 // import 'package:settle_loans/Screens/Client/client_home.dart';
 
 // class ScheduleACall extends StatefulWidget {
@@ -31,7 +34,7 @@
 //           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 //           callServiceBooking = BookingService(
 //               serviceName: 'Call Service',
-//               serviceDuration: 60,
+//               serviceDuration: 30,
 //               userId: user.uid,
 //               userEmail: user.email,
 //               userPhoneNumber: data["phoneNumber"],
@@ -57,9 +60,10 @@
 //         .add(newBooking.toJson());
 //     converted.add(DateTimeRange(
 //         start: newBooking.bookingStart, end: newBooking.bookingEnd));
-//     setState(() {
-//       Navigator.pop(context);
-//     });
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const ClientHome()),
+//     );
 //   }
 
 //   List<DateTimeRange> converted = [];
@@ -109,17 +113,81 @@
 //   Widget build(BuildContext context) {
 //     return Scaffold(
 //       appBar: AppBar(
-//         title: const Text('Booking Calendar Demo'),
+//         automaticallyImplyLeading: false,
+//         centerTitle: true,
+//         toolbarHeight: 130,
+//         backgroundColor: Color(0xff000001C),
+//         foregroundColor: const Color(0xFFFFFFFF),
+//         flexibleSpace: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     crossAxisAlignment: CrossAxisAlignment.center,
+//                     children: [
+//                       IconButton(
+//                           onPressed: () {
+//                             Navigator.pop(context);
+//                           },
+//                           icon: Icon(
+//                             Icons.arrow_back,
+//                             size: 30.0,
+//                             color: Colors.white,
+//                           )),
+//                       Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Text(
+//                             'Schedule a Call',
+//                             style: HeadingTextStyle3(),
+//                           ),
+//                           // SizedBox(
+//                           //   width: 10,
+//                           // ),
+
+//                           Text(
+//                             'Select date and time',
+//                             style: TextStyle(
+//                               color: Colors.white,
+//                               fontSize: 14,
+//                               fontWeight: FontWeight.w500,
+//                               fontFamily: GoogleFonts.rubik().fontFamily,
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                   Icon(
+//                     Icons.notifications,
+//                     size: 30.0,
+//                     color: Colors.white,
+//                   ),
+//                 ],
+//               ),
+//             )
+//           ],
+//         ),
 //       ),
 //       body: callServiceBooking != null
 //           ? Center(
 //               child: BookingCalendar(
+//                 // bookingButtonColor: Yellow,
+//                 bookingButtonText: 'Confirm Booking',
+//                 // bookedSlotTextStyle: LabelTextStyle1(),
+//                 availableSlotColor: Color.fromARGB(255, 255, 252, 243),
+//                 bookedSlotColor: Color.fromARGB(255, 255, 249, 230),
+//                 selectedSlotColor: Yellow,
 //                 bookingService: callServiceBooking!,
 //                 convertStreamResultToDateTimeRanges: convertStreamResultMock,
 //                 getBookingStream: getBookingStreamMock,
 //                 uploadBooking: uploadBookingMock,
 //                 loadingWidget: const Text('Fetching data...'),
-//                 uploadingWidget: Popup(),
+//                 uploadingWidget: null,
 //                 locale: 'en_EN',
 //                 startingDayOfWeek: StartingDayOfWeek.monday,
 

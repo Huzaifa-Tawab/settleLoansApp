@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import '/Components/icons.dart';
+import '/Components/icons.dart';
 import '/Constrains/textstyles.dart';
 import '/Screens/Client/services.dart';
 
@@ -12,6 +12,19 @@ class KIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget x = Img;
+    if (title == 'Debt solutions') {
+      x = lawpicture;
+    } else if (title == "Personal loan") {
+      x = Iconsettlement;
+    } else if (title == "Anti-harassment") {
+      x = IconHaressment;
+    } else if (title == "Credit card") {
+      x = Iconcreditcard;
+    } else if (title == "Foreclosure") {
+      x = Iconfile;
+    }
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -38,7 +51,7 @@ class KIconButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 50, width: 50, child: Img),
+            SizedBox(height: 50, width: 50, child: x),
             Text(
               title,
               style: LabelTextStyle3(),

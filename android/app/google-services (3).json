@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "637492759790",
+    "project_id": "settle-loans-14fc6",
+    "storage_bucket": "settle-loans-14fc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637492759790:android:67d98821dcc0fa37e677ff",
+        "android_client_info": {
+          "package_name": "com.example.settle_loans"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637492759790-rp1ia19fcbpucnij4v0m1vtb1g9a4to0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.settle_loans",
+            "certificate_hash": "ea423b5e22c6d1cbb8805b90ae257074c147a304"
+          }
+        },
+        {
+          "client_id": "637492759790-n6k2f9jsnro9sc5ul7i9ja31h1nrsc3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEXeJZ1YWHDErPUxaJe_wraArCHayXLPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637492759790-n6k2f9jsnro9sc5ul7i9ja31h1nrsc3f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637492759790-36qa03509sfp5tr65mlvj2v9au3ds039.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.settleLoans"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637492759790:android:53c9ab2993a3c04fe677ff",
+        "android_client_info": {
+          "package_name": "com.settleloans.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637492759790-5kiusghfsh5orvpv5qlv9a34496593id.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.settleloans.app",
+            "certificate_hash": "682739b253c781c6d5889dffe0d4a19aad1d4710"
+          }
+        },
+        {
+          "client_id": "637492759790-n6k2f9jsnro9sc5ul7i9ja31h1nrsc3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEXeJZ1YWHDErPUxaJe_wraArCHayXLPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637492759790-n6k2f9jsnro9sc5ul7i9ja31h1nrsc3f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637492759790-36qa03509sfp5tr65mlvj2v9au3ds039.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.settleLoans"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,6 +11,8 @@ import '../../Constrains/textfields.dart';
 
 final user = <String, dynamic>{
   'userType': 'client',
+  'Paid': false,
+  'services': [],
 };
 
 class ClientDataScreen1 extends StatelessWidget {

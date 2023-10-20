@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:settle_loans/Screens/Client/schedule_call.dart';
 import '/Components/icons.dart';
 import '/Components/shared_prefs.dart';
 import '/Constrains/Buttons.dart';
@@ -26,9 +27,9 @@ class ClientHome extends StatefulWidget {
 }
 
 class _ClientHomeState extends State<ClientHome> {
+  final db = FirebaseFirestore.instance;
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
-  bool ispayactived=true;
   @override
   void initState() {
     super.initState();
@@ -37,16 +38,21 @@ class _ClientHomeState extends State<ClientHome> {
         setState(() {
           userDetails = val;
         });
+        // getdata();
       } else {
         getDataFromDb();
       }
     });
   }
 
-  // Schedule_A_Call_Handler() {
-  //   Navigator.push(context,
-  //       MaterialPageRoute(builder: ((context) => const ScheduleACall())));
-  // }
+  // getdata()async{
+  //       String uid = FirebaseAuth.instance.currentUser!.uid;
+  //     await db.collection("userDetails").doc(uid).get().then((value) => null);
+  //   }
+  Schedule_A_Call_Handler() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: ((context) => const ScheduleACall())));
+  }
 
   LogoutHandler() {
     FirebaseAuth.instance.signOut().then((value) {
@@ -67,11 +73,30 @@ class _ClientHomeState extends State<ClientHome> {
         .get()
         .then((value) {
       putJson('userDetails', value.data());
+      value.data()?['Paid'];
       setState(() {
         userDetails = value.data()!;
+        print(userDetails);
       });
     });
   }
+
+  getupdateFromDb() {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    FirebaseFirestore.instance
+        .collection('userDetails')
+        .doc(uid)
+        .get()
+        .then((value) {
+      value.data()?['Paid'];
+      setState(() {
+        userDetails = value.data()!;
+        print(userDetails);
+      });
+    });
+  }
+
+  // bool ispayactived = false;
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +123,10 @@ class _ClientHomeState extends State<ClientHome> {
                             '${userDetails['name']}',
                             style: HeadingTextStyle3(),
                           ),
-                          
-                          Text(ispayactived?
-                            
-                            'Old Member':"New Member",
+                          Text(
+                            getupdateFromDb() == null
+                                ? 'New Member'
+                                : "Old Member",
                             style: LabelTextStyle1(),
                           ),
                         ],
@@ -142,62 +167,57 @@ class _ClientHomeState extends State<ClientHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ispayactived?  ButtonWithIcon(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFFFFCF3),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconPhone,
-                        ),
-                        padding: 10,
-                        text: 'Request a call',
-                        fontSize: 10,
-                        borderWidth: 0.2,
-                        radius: 20,
-                        textColor: const Color(0xFFAAAAAA),
-                        // onPressed: Schedule_A_Call_Handler,
-                        onPressed: () {
-                          showDataAlert(context);
-  //                          Navigator.push(
-  //   context,
-  //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
-  // );
-                        },
-                        color: Colors.transparent,
-                      ):
-                      ButtonWithIcon(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFFFFCF3),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconPhone,
-                        ),
-                        padding: 10,
-                        text: 'Schedule a call',
-                        fontSize: 10,
-                        borderWidth: 0.2,
-                        radius: 20,
-                        textColor: const Color(0xFFAAAAAA),
-                        // onPressed: Schedule_A_Call_Handler,
-                        onPressed: () {
-                           Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const ScheduleACall()),
-  );
-                        },
-                        color: Colors.transparent,
-                      ),
-  
+                      getupdateFromDb() == null
+                          ? ButtonWithIcon(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 40,
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFFFFCF3),
+                                  shape: OvalBorder(),
+                                ),
+                                child: IconPhone,
+                              ),
+                              padding: 10,
+                              text: 'Schedule a call',
+                              fontSize: 10,
+                              borderWidth: 0.2,
+                              radius: 20,
+                              textColor: const Color(0xFFAAAAAA),
+                              onPressed: Schedule_A_Call_Handler,
+                              // onPressed: () {},
+                              color: Colors.transparent,
+                            )
+                          : ButtonWithIcon(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 40,
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFFFFCF3),
+                                  shape: OvalBorder(),
+                                ),
+                                child: IconPhone,
+                              ),
+                              padding: 10,
+                              text: 'Request a call',
+                              fontSize: 10,
+                              borderWidth: 0.2,
+                              radius: 20,
+                              textColor: const Color(0xFFAAAAAA),
+                              // onPressed: Schedule_A_Call_Handler,
+                              onPressed: () {
+                                showDataAlert(context);
+                                //                          Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
+                                // );
+                              },
+                              color: Colors.transparent,
+                            ),
                       ButtonWithIcon(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
@@ -234,92 +254,93 @@ class _ClientHomeState extends State<ClientHome> {
                 const SizedBox(
                   height: 10,
                 ),
-                ispayactived?SizedBox():
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFFFDC60),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome Onboard!",
-                        style: PrimaryTextStyle(),
-                      ),
-                      Text(
-                        "Lets us set up a call with your financial advisor.",
-                        style: PrimaryTextStyle(),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 200,
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'A ',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: '49 ₹',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                getupdateFromDb() == null
+                    ? SizedBox()
+                    : Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFFFDC60),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const Paymentgateway()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: const StadiumBorder()),
-                            child: const Icon(Icons.arrow_forward),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Welcome Onboard!",
+                              style: PrimaryTextStyle(),
+                            ),
+                            Text(
+                              "Lets us set up a call with your financial advisor.",
+                              style: PrimaryTextStyle(),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'A ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '49 ₹',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Paymentgateway()),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                      shape: const StadiumBorder()),
+                                  child: const Icon(Icons.arrow_forward),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -339,20 +360,27 @@ class _ClientHomeState extends State<ClientHome> {
                         ),
                       )
                     : SizedBox(
-                        height: 100, // Adjust the height as needed
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconNothing,
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              'No added services',
-                              style: LabelTextStyle2(),
-                            )
-                          ],
+                        height: 100,
+                        width: 5000, // Adjust the height as needed
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              userDetails['services'] == null
+                                  ? Text('no Services are added')
+                                  : userDetails['services'].map(
+                                      (service) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: KIconButton(
+                                            title: service, Img: Test),
+                                      ),
+                                      // KIconButton(title: service, Img: Test),
+                                      // KIconButton(title: service, Img: Test),
+                                    )
+                            ],
+                          ),
                         ),
                       ),
 
@@ -406,7 +434,6 @@ class _ClientHomeState extends State<ClientHome> {
   }
 }
 
-
 showDataAlert(context) {
   showDialog(
       context: context,
@@ -422,37 +449,33 @@ showDataAlert(context) {
           contentPadding: EdgeInsets.only(
             top: 10.0,
           ),
-         
-          content: 
-           Container(
+          content: Container(
             height: 250,
             width: 200,
-             child: Column(
-               mainAxisAlignment: MainAxisAlignment.center,
-               children: [
-                 Image.asset('assets/CheckCircle.png'),
-                 // SizedBox(
-                 //   height: 10,
-                 // ),
-                 Divider(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/CheckCircle.png'),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                Divider(
                   thickness: 2,
-                   endIndent: 45,
-                   indent: 45,
-                 ),
-                 Text(
-                     'Thank you for booking\n you will hear from our\n execuitive shortly'),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(top: 20),
-                      //   child: TextButton(
-                      //                 onPressed: () => Navigator.pop(context, 'OK'),
-                      //                 child: const Text('OK'),
-                      //               ),
-                      // ),
-               ],
-             ),
-           ),
-           
-          
+                  endIndent: 45,
+                  indent: 45,
+                ),
+                Text(
+                    'Thank you for booking\n you will hear from our\n execuitive shortly'),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: TextButton(
+                //                 onPressed: () => Navigator.pop(context, 'OK'),
+                //                 child: const Text('OK'),
+                //               ),
+                // ),
+              ],
+            ),
+          ),
         );
       });
 }
