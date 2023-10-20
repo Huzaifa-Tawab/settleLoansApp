@@ -1,5 +1,8 @@
 // ignore_for_file: must_be_immutable, unused_import
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/Components/icons.dart';
@@ -10,7 +13,7 @@ import '/Screens/Client/client_home.dart';
 bool _isCardChecked = false;
 bool _isnetBChecked = false;
 bool _isWalletChecked = false;
-bool isnewmember =true;
+bool isnewmember = true;
 
 class Paymentgateway extends StatefulWidget {
   const Paymentgateway({super.key});
@@ -21,6 +24,8 @@ class Paymentgateway extends StatefulWidget {
 
 class _PaymentgatewayState extends State<Paymentgateway> {
   bool ispayactived = false;
+  final user = FirebaseAuth.instance.currentUser;
+  final db = FirebaseFirestore.instance;
   @override
   void initState() {
     // TODO: implement initState
@@ -30,6 +35,13 @@ class _PaymentgatewayState extends State<Paymentgateway> {
       _isnetBChecked = false;
       _isWalletChecked = false;
     });
+  }
+
+  updatedata() async {
+    await db
+        .collection("userdetails")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'Paid': true});
   }
 
   @override
@@ -77,7 +89,7 @@ class _PaymentgatewayState extends State<Paymentgateway> {
                     setState(() {
                       ispayactived ? showDataAlert(context) : null;
                     });
-                    ispayactived?isnewmember=false:Text("old member") ;
+                    ispayactived ? updatedata() : Text("old member");
                   },
                   child: Text(
                     "Pay Now",
@@ -289,6 +301,7 @@ showDataAlert(context) {
         );
       });
 }
+
 class memberstatus extends StatelessWidget {
   const memberstatus({super.key});
 

@@ -30,7 +30,6 @@ class _ClientHomeState extends State<ClientHome> {
   final db = FirebaseFirestore.instance;
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
-  bool ispayactived = true;
   @override
   void initState() {
     super.initState();
@@ -45,14 +44,15 @@ class _ClientHomeState extends State<ClientHome> {
       }
     });
   }
+
   // getdata()async{
   //       String uid = FirebaseAuth.instance.currentUser!.uid;
   //     await db.collection("userDetails").doc(uid).get().then((value) => null);
   //   }
-  // Schedule_A_Call_Handler() {
-  //   Navigator.push(context,
-  //       MaterialPageRoute(builder: ((context) => const ScheduleACall())));
-  // }
+  Schedule_A_Call_Handler() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: ((context) => const ScheduleACall())));
+  }
 
   LogoutHandler() {
     FirebaseAuth.instance.signOut().then((value) {
@@ -73,6 +73,7 @@ class _ClientHomeState extends State<ClientHome> {
         .get()
         .then((value) {
       putJson('userDetails', value.data());
+      value.data()?['Paid'];
       setState(() {
         userDetails = value.data()!;
         print(userDetails);
@@ -80,10 +81,25 @@ class _ClientHomeState extends State<ClientHome> {
     });
   }
 
+  getupdateFromDb() {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    FirebaseFirestore.instance
+        .collection('userDetails')
+        .doc(uid)
+        .get()
+        .then((value) {
+      value.data()?['Paid'];
+      setState(() {
+        userDetails = value.data()!;
+        print(userDetails);
+      });
+    });
+  }
+
+  // bool ispayactived = false;
+
   @override
   Widget build(BuildContext context) {
-    // print();
-
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(300),
@@ -108,7 +124,9 @@ class _ClientHomeState extends State<ClientHome> {
                             style: HeadingTextStyle3(),
                           ),
                           Text(
-                            ispayactived ? 'Old Member' : "New Member",
+                            getupdateFromDb() == null
+                                ? 'New Member'
+                                : "Old Member",
                             style: LabelTextStyle1(),
                           ),
                         ],
@@ -149,8 +167,30 @@ class _ClientHomeState extends State<ClientHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ispayactived
+                      getupdateFromDb() == null
                           ? ButtonWithIcon(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 40,
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFFFFCF3),
+                                  shape: OvalBorder(),
+                                ),
+                                child: IconPhone,
+                              ),
+                              padding: 10,
+                              text: 'Schedule a call',
+                              fontSize: 10,
+                              borderWidth: 0.2,
+                              radius: 20,
+                              textColor: const Color(0xFFAAAAAA),
+                              onPressed: Schedule_A_Call_Handler,
+                              // onPressed: () {},
+                              color: Colors.transparent,
+                            )
+                          : ButtonWithIcon(
                               leading: Container(
                                 padding: const EdgeInsets.all(8),
                                 margin: const EdgeInsets.only(right: 10),
@@ -176,28 +216,6 @@ class _ClientHomeState extends State<ClientHome> {
                                 //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
                                 // );
                               },
-                              color: Colors.transparent,
-                            )
-                          : ButtonWithIcon(
-                              leading: Container(
-                                padding: const EdgeInsets.all(8),
-                                margin: const EdgeInsets.only(right: 10),
-                                width: 40,
-                                height: 40,
-                                decoration: const ShapeDecoration(
-                                  color: Color(0xFFFFFCF3),
-                                  shape: OvalBorder(),
-                                ),
-                                child: IconPhone,
-                              ),
-                              padding: 10,
-                              text: 'Schedule a call',
-                              fontSize: 10,
-                              borderWidth: 0.2,
-                              radius: 20,
-                              textColor: const Color(0xFFAAAAAA),
-                              // onPressed: Schedule_A_Call_Handler,
-                              onPressed: () {},
                               color: Colors.transparent,
                             ),
                       ButtonWithIcon(
@@ -236,7 +254,7 @@ class _ClientHomeState extends State<ClientHome> {
                 const SizedBox(
                   height: 10,
                 ),
-                ispayactived
+                getupdateFromDb() == null
                     ? SizedBox()
                     : Container(
                         padding: const EdgeInsets.all(20),
@@ -342,18 +360,27 @@ class _ClientHomeState extends State<ClientHome> {
                         ),
                       )
                     : SizedBox(
-                        height: 100, // Adjust the height as needed
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // ...userDetails['services']
-                            //     .map(
-                            //       (service) =>
-                            //           KIconButton(title: service, Img: Test),
-                            //     )
-                            //     .toList()
-                          ],
+                        height: 100,
+                        width: 5000, // Adjust the height as needed
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              userDetails['services'] == null
+                                  ? Text('no Services are added')
+                                  : userDetails['services'].map(
+                                      (service) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
+                                        child: KIconButton(
+                                            title: service, Img: Test),
+                                      ),
+                                      // KIconButton(title: service, Img: Test),
+                                      // KIconButton(title: service, Img: Test),
+                                    )
+                            ],
+                          ),
                         ),
                       ),
 
