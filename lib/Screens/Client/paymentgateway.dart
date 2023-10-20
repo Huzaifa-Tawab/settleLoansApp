@@ -10,6 +10,7 @@ import '/Screens/Client/client_home.dart';
 bool _isCardChecked = false;
 bool _isnetBChecked = false;
 bool _isWalletChecked = false;
+bool isnewmember =true;
 
 class Paymentgateway extends StatefulWidget {
   const Paymentgateway({super.key});
@@ -76,6 +77,7 @@ class _PaymentgatewayState extends State<Paymentgateway> {
                     setState(() {
                       ispayactived ? showDataAlert(context) : null;
                     });
+                    ispayactived?isnewmember=false:Text("old member") ;
                   },
                   child: Text(
                     "Pay Now",
@@ -227,7 +229,7 @@ class PaymentContainer extends StatelessWidget {
             isChecked
                 ? Icon(
                     Icons.check,
-                    color: Color.fromARGB(255, 141, 5, 5),
+                    color: Colors.black,
                   )
                 : SizedBox(),
           ],
@@ -286,4 +288,12 @@ showDataAlert(context) {
           ),
         );
       });
+}
+class memberstatus extends StatelessWidget {
+  const memberstatus({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("old Member");
+  }
 }

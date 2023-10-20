@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,10 +13,11 @@ import '/Constrains/colors.dart';
 import '/Constrains/iconbuton.dart';
 import '/Constrains/textstyles.dart';
 import '/Screens/Auth/login.dart';
-import '/Screens/Client/client_data.dart';
+// import '/Screens/Client/client_data.dart';
 import '/Screens/Client/paymentgateway.dart';
 
-import '/Screens/Client/services.dart';
+// import '/Screens/Client/services.dart';
+import '/Screens/Client/schedule_call.dart';
 
 class ClientHome extends StatefulWidget {
   const ClientHome({super.key});
@@ -29,6 +30,7 @@ class _ClientHomeState extends State<ClientHome> {
   final db = FirebaseFirestore.instance;
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
+  bool ispayactived = true;
   @override
   void initState() {
     super.initState();
@@ -106,7 +108,7 @@ class _ClientHomeState extends State<ClientHome> {
                             style: HeadingTextStyle3(),
                           ),
                           Text(
-                            'New Member',
+                            ispayactived ? 'Old Member' : "New Member",
                             style: LabelTextStyle1(),
                           ),
                         ],
@@ -147,34 +149,57 @@ class _ClientHomeState extends State<ClientHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ButtonWithIcon(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFFFFCF3),
-                            shape: OvalBorder(),
-                          ),
-                          child: IconPhone,
-                        ),
-                        padding: 10,
-                        text: 'Schedule a call',
-                        fontSize: 10,
-                        borderWidth: 0.2,
-                        radius: 20,
-                        textColor: const Color(0xFFAAAAAA),
-                        // onPressed: Schedule_A_Call_Handler,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ScheduleACall()),
-                          );
-                        },
-                        color: Colors.transparent,
-                      ),
+                      ispayactived
+                          ? ButtonWithIcon(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 40,
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFFFFCF3),
+                                  shape: OvalBorder(),
+                                ),
+                                child: IconPhone,
+                              ),
+                              padding: 10,
+                              text: 'Request a call',
+                              fontSize: 10,
+                              borderWidth: 0.2,
+                              radius: 20,
+                              textColor: const Color(0xFFAAAAAA),
+                              // onPressed: Schedule_A_Call_Handler,
+                              onPressed: () {
+                                showDataAlert(context);
+                                //                          Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
+                                // );
+                              },
+                              color: Colors.transparent,
+                            )
+                          : ButtonWithIcon(
+                              leading: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 10),
+                                width: 40,
+                                height: 40,
+                                decoration: const ShapeDecoration(
+                                  color: Color(0xFFFFFCF3),
+                                  shape: OvalBorder(),
+                                ),
+                                child: IconPhone,
+                              ),
+                              padding: 10,
+                              text: 'Schedule a call',
+                              fontSize: 10,
+                              borderWidth: 0.2,
+                              radius: 20,
+                              textColor: const Color(0xFFAAAAAA),
+                              // onPressed: Schedule_A_Call_Handler,
+                              onPressed: () {},
+                              color: Colors.transparent,
+                            ),
                       ButtonWithIcon(
                         leading: Container(
                           padding: const EdgeInsets.all(8),
@@ -211,91 +236,93 @@ class _ClientHomeState extends State<ClientHome> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFFFDC60),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome Onboard!",
-                        style: PrimaryTextStyle(),
-                      ),
-                      Text(
-                        "Lets us set up a call with your financial advisor.",
-                        style: PrimaryTextStyle(),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 200,
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'A ',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: '49 ₹',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text:
-                                        ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 10,
-                                      fontFamily:
-                                          GoogleFonts.rubik().fontFamily,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                ispayactived
+                    ? SizedBox()
+                    : Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFFFDC60),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const Paymentgateway()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: const StadiumBorder()),
-                            child: const Icon(Icons.arrow_forward),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Welcome Onboard!",
+                              style: PrimaryTextStyle(),
+                            ),
+                            Text(
+                              "Lets us set up a call with your financial advisor.",
+                              style: PrimaryTextStyle(),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: 'A ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: '49 ₹',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text:
+                                              ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 10,
+                                            fontFamily:
+                                                GoogleFonts.rubik().fontFamily,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Paymentgateway()),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                      shape: const StadiumBorder()),
+                                  child: const Icon(Icons.arrow_forward),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -378,4 +405,50 @@ class _ClientHomeState extends State<ClientHome> {
           ),
         ));
   }
+}
+
+showDataAlert(context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(
+                20.0,
+              ),
+            ),
+          ),
+          contentPadding: EdgeInsets.only(
+            top: 10.0,
+          ),
+          content: Container(
+            height: 250,
+            width: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/CheckCircle.png'),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                Divider(
+                  thickness: 2,
+                  endIndent: 45,
+                  indent: 45,
+                ),
+                Text(
+                    'Thank you for booking\n you will hear from our\n execuitive shortly'),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: TextButton(
+                //                 onPressed: () => Navigator.pop(context, 'OK'),
+                //                 child: const Text('OK'),
+                //               ),
+                // ),
+              ],
+            ),
+          ),
+        );
+      });
 }
