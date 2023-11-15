@@ -7,7 +7,6 @@ import '/Components/shared_prefs.dart';
 import '/Screens/Auth/login.dart';
 import '/Screens/Client/client_data.dart';
 import '/Screens/Client/client_home.dart';
-
 import '/Constrains/Buttons.dart';
 import '/Constrains/colors.dart';
 import '/Constrains/textfields.dart';
@@ -27,6 +26,29 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _EmailController = TextEditingController();
   final TextEditingController _PasswordController = TextEditingController();
 
+  // final _auth = FirebaseAuth.instance;
+  // dynamic user;
+  // late String userEmail;
+
+  // void getCurrentUserInfo() async {
+  //   user = await _auth.currentUser!;
+  //   userEmail = user.email;
+  //   print(userEmail);
+  //   set() async {
+  //     FirebaseFirestore.instance.collection('userDetails').doc(user.uid).set({
+  //       "email": userEmail,
+  //     }).then((value) => null);
+
+  //     // FirebaseFirestore.instance
+  //     //     .collection("callRequest")
+  //     //     .doc(FirebaseAuth.instance.currentUser!.uid)
+  //     // .set(callRequest)
+  //     // .onError((e, _) => print("Error writing document: $e"));
+  //     // Navigator.push(
+  //     //     context, MaterialPageRoute(builder: (context) => ClientHome()));
+  //   }
+  // }
+
 //  SignUp  with Email Ad Password
   signUpHandler() async {
     try {
@@ -43,6 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
               builder: (context) => ClientDataScreen1(),
             ),
             (Route<dynamic> route) => false);
+        // getCurrentUserInfo();
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -218,7 +241,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 60,
                   child: RoundedButton1(
                     text: 'Sign Up',
-                    onPressed: signUpHandler,
+                    onPressed: () {
+                      signUpHandler();
+                    },
                   ),
                 ),
               ),

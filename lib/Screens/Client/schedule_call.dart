@@ -251,6 +251,9 @@ class _ScheduleACallState extends State<ScheduleACall> {
     }
   }
 
+  final user = FirebaseAuth.instance.currentUser;
+  final db = FirebaseAuth.instance;
+
   Stream<dynamic>? getBookingStreamMock(
       {required DateTime end, required DateTime start}) {
     return FirebaseFirestore.instance.collection("callBookings").snapshots();
@@ -273,28 +276,6 @@ class _ScheduleACallState extends State<ScheduleACall> {
   List<DateTimeRange> converted = [];
 
   List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
-    ///here you can parse the streamresult and convert to [List<DateTimeRange>]
-    ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
-    ///disabledDays will properly work with real data
-    // DateTime first = now;
-    // DateTime tomorrow = now.add(const Duration(days: 1));
-    // DateTime second = now.add(const Duration(minutes: 55));
-    // DateTime third = now.subtract(const Duration(minutes: 240));
-    // DateTime fourth = now.subtract(const Duration(minutes: 500));
-    // converted.add(
-    //     DateTimeRange(start: first, end: now.add(const Duration(minutes: 30))));
-    // converted.add(DateTimeRange(
-    //     start: second, end: second.add(const Duration(minutes: 23))));
-    // converted.add(DateTimeRange(
-    //     start: third, end: third.add(const Duration(minutes: 15))));
-    // converted.add(DateTimeRange(
-    //     start: fourth, end: fourth.add(const Duration(minutes: 50))));
-
-    // //book whole day example
-    // converted.add(DateTimeRange(
-    //     start: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 5, 0),
-    //     end: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 23, 0)));
-    List<DateTimeRange> converted = [];
     for (var i = 0; i < streamResult.size; i++) {
       Map<String, dynamic> item =
           streamResult.docs[i].data() as Map<String, dynamic>;

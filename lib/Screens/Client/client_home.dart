@@ -2,9 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:settle_loans/Screens/Client/client_data.dart';
 import 'package:settle_loans/Screens/Client/schedule_call.dart';
 import '/Components/icons.dart';
 import '/Components/shared_prefs.dart';
@@ -30,19 +32,53 @@ class _ClientHomeState extends State<ClientHome> {
   final db = FirebaseFirestore.instance;
   Map<String, dynamic> userDetails = {};
   bool myServices = false;
+  bool gotdata = false;
   @override
   void initState() {
     super.initState();
     getJson('userDetails').then((val) {
       if (val != null) {
+        print(val);
         setState(() {
           userDetails = val;
         });
+        gotdata = true;
         // getdata();
       } else {
         getDataFromDb();
       }
     });
+  }
+
+  final _auth = FirebaseAuth.instance;
+  dynamic user;
+  late String userEmail;
+
+  void getCurrentUserInfo() async {
+    user = await _auth.currentUser!;
+    userEmail = user.email;
+    print(userEmail);
+  }
+
+  set() async {
+    FirebaseFirestore.instance
+        .collection('userDetails')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      "name": userDetails['name'],
+      "phone": userDetails['phoneNumber'],
+      "status": isnewmember,
+      "email": userEmail,
+      "timestamp": userDetails['time'],
+    }).then((value) => null);
+
+    // FirebaseFirestore.instance
+    //     .collection("callRequest")
+    //     .doc(FirebaseAuth.instance.currentUser!.uid);
+    // .set(userDetails);
+    // .onError((e, _) => print("Error writing document: $e"));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => ClientHome()));
   }
 
   // getdata()async{
@@ -65,30 +101,17 @@ class _ClientHomeState extends State<ClientHome> {
     });
   }
 
-  getDataFromDb() {
+  Future<void> getDataFromDb() {
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection('userDetails')
         .doc(uid)
         .get()
         .then((value) {
       putJson('userDetails', value.data());
-      value.data()?['Paid'];
-      setState(() {
-        userDetails = value.data()!;
-        print(userDetails);
-      });
-    });
-  }
+      gotdata = true;
 
-  getupdateFromDb() {
-    String? uid = FirebaseAuth.instance.currentUser?.uid;
-    FirebaseFirestore.instance
-        .collection('userDetails')
-        .doc(uid)
-        .get()
-        .then((value) {
-      value.data()?['Paid'];
+      // value.data()?['Paid'];
       setState(() {
         userDetails = value.data()!;
         print(userDetails);
@@ -100,337 +123,379 @@ class _ClientHomeState extends State<ClientHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(300),
-          child: AppBar(
-            backgroundColor: Black,
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return gotdata
+        ? Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(300),
+              child: AppBar(
+                backgroundColor: Black,
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
                     children: [
-                      Column(
+                      const SizedBox(
+                        height: 80,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${userDetails['name']}',
-                            style: HeadingTextStyle3(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${userDetails['name']}',
+                                style: HeadingTextStyle3(),
+                              ),
+                              Text(
+                                userDetails['Paid']
+                                    ? 'Old Member'
+                                    : "New Member",
+                                style: LabelTextStyle1(),
+                              ),
+                            ],
                           ),
-                          Text(
-                            getupdateFromDb() == null
-                                ? 'New Member'
-                                : "Old Member",
-                            style: LabelTextStyle1(),
+                          GestureDetector(
+                            onTap: () {},
+                            child: IconBell,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: 'Search...',
+                          // Add a clear button to the search bar
+                          suffixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.search,
+                              color: Black,
+                            ),
+                            onPressed: () => {},
+                          ),
+                          // Add a search icon or button to the search bar
+
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          userDetails['Paid']
+                              ? ButtonWithIcon(
+                                  leading: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.only(right: 10),
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const ShapeDecoration(
+                                      color: Color(0xFFFFFCF3),
+                                      shape: OvalBorder(),
+                                    ),
+                                    child: IconPhone,
+                                  ),
+                                  padding: 10,
+                                  text: 'Request a call',
+                                  fontSize: 10,
+                                  borderWidth: 0.2,
+                                  radius: 20,
+                                  textColor: const Color(0xFFAAAAAA),
+                                  // onPressed: Schedule_A_Call_Handler,
+                                  onPressed: () {
+                                    getCurrentUserInfo();
+                                    showDataAlert(context);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const ScheduleACall()),
+                                    // );
+                                  },
+                                  color: Colors.transparent,
+                                )
+                              : ButtonWithIcon(
+                                  leading: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    margin: const EdgeInsets.only(right: 10),
+                                    width: 40,
+                                    height: 40,
+                                    decoration: const ShapeDecoration(
+                                      color: Color(0xFFFFFCF3),
+                                      shape: OvalBorder(),
+                                    ),
+                                    child: IconPhone,
+                                  ),
+                                  padding: 10,
+                                  text: 'Schedule a call',
+                                  fontSize: 10,
+                                  borderWidth: 0.2,
+                                  radius: 20,
+                                  textColor: const Color(0xFFAAAAAA),
+                                  onPressed: Schedule_A_Call_Handler,
+
+                                  // onPressed: () {},
+                                  color: Colors.transparent,
+                                ),
+                          ButtonWithIcon(
+                            leading: Container(
+                              padding: const EdgeInsets.all(8),
+                              margin: const EdgeInsets.only(right: 10),
+                              width: 40,
+                              height: 40,
+                              decoration: const ShapeDecoration(
+                                color: Color(0xFFFFFCF3),
+                                shape: OvalBorder(),
+                              ),
+                              child: IconBill,
+                            ),
+                            padding: 10,
+                            text: 'Track you billing',
+                            fontSize: 10,
+                            borderWidth: 0.2,
+                            radius: 20,
+                            textColor: const Color(0xFFAAAAAA),
+                            onPressed: () {},
+                            color: Colors.transparent,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            body: RefreshIndicator(
+              onRefresh: () {
+                return getDataFromDb();
+              },
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      userDetails['Paid']
+                          ? SizedBox()
+                          : Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: ShapeDecoration(
+                                color: const Color(0xFFFFDC60),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Welcome Onboard!",
+                                    style: PrimaryTextStyle(),
+                                  ),
+                                  Text(
+                                    "Lets us set up a call with your financial advisor.",
+                                    style: PrimaryTextStyle(),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width: 200,
+                                        child: Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'A ',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10,
+                                                  fontFamily:
+                                                      GoogleFonts.rubik()
+                                                          .fontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: '49 ₹',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10,
+                                                  fontFamily:
+                                                      GoogleFonts.rubik()
+                                                          .fontFamily,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 10,
+                                                  fontFamily:
+                                                      GoogleFonts.rubik()
+                                                          .fontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const Paymentgateway()),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white,
+                                            shape: const StadiumBorder()),
+                                        child: const Icon(Icons.arrow_forward),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'My Services',
+                          style: PrimaryTextStyle(),
+                        ),
+                      ),
+                      // Horizontal Scroll Container
+                      myServices
+                          ? const SizedBox(
+                              height: 100, // Adjust the height as needed
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: <Widget>[],
+                                ),
+                              ),
+                            )
+                          : SizedBox(
+                              height: 100,
+                              width: 5000, // Adjust the height as needed
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ...userDetails['Paid'] == null
+                                        ? SizedBox(
+                                            width: 300,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icontelescop,
+                                                Text(
+                                                  'No added services',
+                                                  style: LabelTextStyle1(),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : userDetails['services'].map(
+                                            (service) => Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 10, left: 2),
+                                              child: KIconButton(
+                                                  title: service, Img: Test),
+                                            ),
+                                          ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Other Services',
+                          style: PrimaryTextStyle(),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          KIconButton(
+                              title: 'Debt free \nsolutions', Img: Test),
+                          KIconButton(
+                            title: 'Personal loan\nsettlement',
+                            Img: Iconsettlement,
                           ),
                         ],
                       ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: IconBell,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'Search...',
-                      // Add a clear button to the search bar
-                      suffixIcon: IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          color: Black,
-                        ),
-                        onPressed: () => {},
+                      const SizedBox(
+                        height: 20,
                       ),
-                      // Add a search icon or button to the search bar
-
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      getupdateFromDb() == null
-                          ? ButtonWithIcon(
-                              leading: Container(
-                                padding: const EdgeInsets.all(8),
-                                margin: const EdgeInsets.only(right: 10),
-                                width: 40,
-                                height: 40,
-                                decoration: const ShapeDecoration(
-                                  color: Color(0xFFFFFCF3),
-                                  shape: OvalBorder(),
-                                ),
-                                child: IconPhone,
-                              ),
-                              padding: 10,
-                              text: 'Schedule a call',
-                              fontSize: 10,
-                              borderWidth: 0.2,
-                              radius: 20,
-                              textColor: const Color(0xFFAAAAAA),
-                              onPressed: Schedule_A_Call_Handler,
-                              // onPressed: () {},
-                              color: Colors.transparent,
-                            )
-                          : ButtonWithIcon(
-                              leading: Container(
-                                padding: const EdgeInsets.all(8),
-                                margin: const EdgeInsets.only(right: 10),
-                                width: 40,
-                                height: 40,
-                                decoration: const ShapeDecoration(
-                                  color: Color(0xFFFFFCF3),
-                                  shape: OvalBorder(),
-                                ),
-                                child: IconPhone,
-                              ),
-                              padding: 10,
-                              text: 'Request a call',
-                              fontSize: 10,
-                              borderWidth: 0.2,
-                              radius: 20,
-                              textColor: const Color(0xFFAAAAAA),
-                              // onPressed: Schedule_A_Call_Handler,
-                              onPressed: () {
-                                showDataAlert(context);
-                                //                          Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => const ScheduleACall()),
-                                // );
-                              },
-                              color: Colors.transparent,
-                            ),
-                      ButtonWithIcon(
-                        leading: Container(
-                          padding: const EdgeInsets.all(8),
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 40,
-                          height: 40,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFFFFFCF3),
-                            shape: OvalBorder(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          KIconButton(
+                              title: 'Anti\n-harassment\nservices',
+                              Img: IconHaressment),
+                          KIconButton(
+                            title: 'Credit card\nsettlement',
+                            Img: Iconcreditcard,
                           ),
-                          child: IconBill,
-                        ),
-                        padding: 10,
-                        text: 'Track you billing',
-                        fontSize: 10,
-                        borderWidth: 0.2,
-                        radius: 20,
-                        textColor: const Color(0xFFAAAAAA),
-                        onPressed: () {},
-                        color: Colors.transparent,
-                      )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          KIconButton(
+                            title: 'Settlement &\nforeclosure',
+                            Img: Iconfile,
+                          ),
+                        ],
+                      ),
+
+                      ElevatedButton(
+                          onPressed: LogoutHandler,
+                          child: const Text('Logout')),
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: <Widget>[
-                const SizedBox(
-                  height: 10,
-                ),
-                getupdateFromDb() == null
-                    ? SizedBox()
-                    : Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFFFDC60),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Welcome Onboard!",
-                              style: PrimaryTextStyle(),
-                            ),
-                            Text(
-                              "Lets us set up a call with your financial advisor.",
-                              style: PrimaryTextStyle(),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 200,
-                                  child: Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: 'A ',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 10,
-                                            fontFamily:
-                                                GoogleFonts.rubik().fontFamily,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: '49 ₹',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 10,
-                                            fontFamily:
-                                                GoogleFonts.rubik().fontFamily,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text:
-                                              ' fee is being charged by the company to gauge the clients commitment towards loan settlement and determine their seriousness in the process.',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 10,
-                                            fontFamily:
-                                                GoogleFonts.rubik().fontFamily,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const Paymentgateway()),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      shape: const StadiumBorder()),
-                                  child: const Icon(Icons.arrow_forward),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'My Services',
-                    style: PrimaryTextStyle(),
-                  ),
-                ),
-                // Horizontal Scroll Container
-                myServices
-                    ? const SizedBox(
-                        height: 100, // Adjust the height as needed
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: <Widget>[],
-                          ),
-                        ),
-                      )
-                    : SizedBox(
-                        height: 100,
-                        width: 5000, // Adjust the height as needed
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              userDetails['services'] == null
-                                  ? Text('no Services are added')
-                                  : userDetails['services'].map(
-                                      (service) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: KIconButton(
-                                            title: service, Img: Test),
-                                      ),
-                                      // KIconButton(title: service, Img: Test),
-                                      // KIconButton(title: service, Img: Test),
-                                    )
-                            ],
-                          ),
-                        ),
-                      ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    KIconButton(title: 'Debt free \nsolutions', Img: Test),
-                    KIconButton(
-                      title: 'Personal loan\nsettlement',
-                      Img: Iconsettlement,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    KIconButton(
-                        title: 'Anti\n-harassment\nservices',
-                        Img: IconHaressment),
-                    KIconButton(
-                      title: 'Credit card\nsettlement',
-                      Img: Iconcreditcard,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    KIconButton(
-                      title: 'Settlement &\nforeclosure',
-                      Img: Iconfile,
-                    ),
-                  ],
-                ),
-
-                ElevatedButton(
-                    onPressed: LogoutHandler, child: const Text('Logout')),
-              ],
-            ),
-          ),
-        ));
+            ))
+        : Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
   }
 }
 
@@ -466,13 +531,13 @@ showDataAlert(context) {
                 ),
                 Text(
                     'Thank you for booking\n you will hear from our\n execuitive shortly'),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 20),
-                //   child: TextButton(
-                //                 onPressed: () => Navigator.pop(context, 'OK'),
-                //                 child: const Text('OK'),
-                //               ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ),
               ],
             ),
           ),

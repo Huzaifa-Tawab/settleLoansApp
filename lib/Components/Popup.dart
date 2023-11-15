@@ -32,8 +32,7 @@ class Popup extends StatelessWidget {
             endIndent: 20,
             indent: 20,
           ),
-          Text(
-              'Thank you for booking\n you will hear from our\n execuitive shortly'),
+          Text('Thank you for booking\n you will get a call shortly'),
         ],
       ),
     );

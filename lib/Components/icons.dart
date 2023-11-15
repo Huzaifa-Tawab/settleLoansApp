@@ -21,6 +21,10 @@ final Widget IconBill = SvgPicture.asset(
   'assets/bill.svg',
   semanticsLabel: 'Bill Icon',
 );
+final Widget Icontelescop = SvgPicture.asset(
+  'assets/Vector.svg',
+  semanticsLabel: 'telescop Icon',
+);
 final Widget IconNothing = SvgPicture.asset(
   'assets/nothing.svg',
   semanticsLabel: 'Nothing Icon',
