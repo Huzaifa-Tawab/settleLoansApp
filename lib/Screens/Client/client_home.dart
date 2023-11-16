@@ -148,9 +148,8 @@ class _ClientHomeState extends State<ClientHome> {
                                 style: HeadingTextStyle3(),
                               ),
                               Text(
-                                userDetails['Paid']
-                                    ? 'Old Member'
-                                    : "New Member",
+                                // userDetails['Paid']
+                                true ? 'Old Member' : "New Member",
                                 style: LabelTextStyle1(),
                               ),
                             ],
@@ -191,7 +190,8 @@ class _ClientHomeState extends State<ClientHome> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          userDetails['Paid']
+                          // userDetails['Paid']
+                          true
                               ? ButtonWithIcon(
                                   leading: Container(
                                     padding: const EdgeInsets.all(8),
@@ -287,7 +287,8 @@ class _ClientHomeState extends State<ClientHome> {
                       const SizedBox(
                         height: 10,
                       ),
-                      userDetails['Paid']
+                      // userDetails['Paid']
+                      true
                           ? SizedBox()
                           : Container(
                               padding: const EdgeInsets.all(20),
@@ -405,7 +406,7 @@ class _ClientHomeState extends State<ClientHome> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    ...userDetails['Paid'] == null
+                                    true
                                         ? SizedBox(
                                             width: 300,
                                             child: Row(
