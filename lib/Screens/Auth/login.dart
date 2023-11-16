@@ -24,6 +24,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _EmailController = TextEditingController();
   final TextEditingController _PasswordController = TextEditingController();
+
 //  SignUp  with Email Ad Password
   signInHandler() async {
     try {
@@ -34,6 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       )
           .then((value) {
         ConnectToDb(value);
+        print(value);
       });
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -41,6 +43,24 @@ class _LoginScreenState extends State<LoginScreen> {
       print(e);
     }
   }
+
+  // Map<String, dynamic> userDetails = {};
+  // Future<void> getDataFromDb() {
+  //   String uid = FirebaseAuth.instance.currentUser!.uid;
+  //   return FirebaseFirestore.instance
+  //       .collection('userDetails')
+  //       .doc(uid)
+  //       .get()
+  //       .then((value) {
+  //     putJson('userDetails', value.data());
+
+  //     // value.data()?['Paid'];
+  //     setState(() {
+  //       userDetails = value.data()!;
+  //       print(userDetails);
+  //     });
+  //   });
+  // }
 
 // Signup with Google
 
@@ -131,6 +151,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: IconGoogle,
                   ),
                   text: 'Sign in with Google',
+                  centerTitle: true,
+                  onPressed: signInWithGoogle),
+              Text("or"),
+              SizedBox(
+                height: 25,
+              ),
+              ButtonWithIcon(
+                  leading: Container(
+                    height: 35,
+                    padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: IconGoogle,
+                  ),
+                  text: 'Sign in with Apple',
                   centerTitle: true,
                   onPressed: signInWithGoogle),
               SizedBox(

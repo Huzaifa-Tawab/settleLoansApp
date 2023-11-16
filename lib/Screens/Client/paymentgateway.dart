@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:settle_loans/Components/shared_prefs.dart';
 import '/Components/icons.dart';
 import '/Constrains/Buttons.dart';
 import '/Constrains/textstyles.dart';
@@ -38,10 +39,22 @@ class _PaymentgatewayState extends State<Paymentgateway> {
   }
 
   updatedata() async {
+    print(FirebaseAuth.instance.currentUser!.uid);
     await db
-        .collection("userdetails")
+        .collection("userDetails")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({'Paid': true});
+  }
+
+  getDataFromDb() {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance
+        .collection('userDetails')
+        .doc(uid)
+        .get()
+        .then((value) {
+      putJson('userDetails', value.data());
+    });
   }
 
   @override
@@ -88,8 +101,10 @@ class _PaymentgatewayState extends State<Paymentgateway> {
                   onPressed: () {
                     setState(() {
                       ispayactived ? showDataAlert(context) : null;
+                      ispayactived ? updatedata() : Text("old member");
+
+                      getDataFromDb();
                     });
-                    ispayactived ? updatedata() : Text("old member");
                   },
                   child: Text(
                     "Pay Now",
@@ -300,13 +315,4 @@ showDataAlert(context) {
           ),
         );
       });
-}
-
-class memberstatus extends StatelessWidget {
-  const memberstatus({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("old Member");
-  }
 }
