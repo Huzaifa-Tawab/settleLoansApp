@@ -255,7 +255,7 @@ class _ClientHomeState extends State<ClientHome> {
                   height: 10,
                 ),
                 getupdateFromDb() == null
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Container(
                         padding: const EdgeInsets.all(20),
                         decoration: ShapeDecoration(
@@ -359,7 +359,7 @@ class _ClientHomeState extends State<ClientHome> {
                           ),
                         ),
                       )
-                    : SizedBox(
+                    : const SizedBox(
                         height: 100,
                         width: 5000, // Adjust the height as needed
                         child: SingleChildScrollView(
@@ -367,18 +367,18 @@ class _ClientHomeState extends State<ClientHome> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              userDetails['services'] == null
-                                  ? Text('no Services are added')
-                                  : userDetails['services'].map(
-                                      (service) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: KIconButton(
-                                            title: service, Img: Test),
-                                      ),
-                                      // KIconButton(title: service, Img: Test),
-                                      // KIconButton(title: service, Img: Test),
-                                    )
+                              // userDetails['services'] == null
+                              //     ? Text('no Services are added')
+                              //     : userDetails['services'].map(
+                              //         (service) => Padding(
+                              //           padding:
+                              //               const EdgeInsets.only(right: 10),
+                              //           child: KIconButton(
+                              //               title: service, Img: Test),
+                              //         ),
+                              //         KIconButton(title: service, Img: Test),
+                              //         KIconButton(title: service, Img: Test),
+                              //       )
                             ],
                           ),
                         ),
@@ -439,17 +439,17 @@ showDataAlert(context) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(
                 20.0,
               ),
             ),
           ),
-          contentPadding: EdgeInsets.only(
+          contentPadding: const EdgeInsets.only(
             top: 10.0,
           ),
-          content: Container(
+          content: SizedBox(
             height: 250,
             width: 200,
             child: Column(
@@ -459,12 +459,12 @@ showDataAlert(context) {
                 // SizedBox(
                 //   height: 10,
                 // ),
-                Divider(
+                const Divider(
                   thickness: 2,
                   endIndent: 45,
                   indent: 45,
                 ),
-                Text(
+                const Text(
                     'Thank you for booking\n you will hear from our\n execuitive shortly'),
                 // Padding(
                 //   padding: const EdgeInsets.only(top: 20),
