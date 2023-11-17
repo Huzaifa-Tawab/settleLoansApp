@@ -301,7 +301,7 @@ class _ScheduleACallState extends State<ScheduleACall> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         toolbarHeight: 130,
-        backgroundColor: Color(0xff000001C),
+        backgroundColor: const Color(0xff000001c),
         foregroundColor: const Color(0xFFFFFFFF),
         flexibleSpace: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -318,7 +318,7 @@ class _ScheduleACallState extends State<ScheduleACall> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             size: 30.0,
                             color: Colors.white,
@@ -347,7 +347,7 @@ class _ScheduleACallState extends State<ScheduleACall> {
                       ),
                     ],
                   ),
-                  Icon(
+                  const Icon(
                     Icons.notifications,
                     size: 30.0,
                     color: Colors.white,
@@ -364,8 +364,8 @@ class _ScheduleACallState extends State<ScheduleACall> {
                 // bookingButtonColor: Yellow,
                 bookingButtonText: 'Confirm Booking',
                 // bookedSlotTextStyle: LabelTextStyle1(),
-                availableSlotColor: Color.fromARGB(255, 255, 252, 243),
-                bookedSlotColor: Color.fromARGB(255, 255, 249, 230),
+                availableSlotColor: const Color.fromARGB(255, 255, 252, 243),
+                bookedSlotColor: const Color.fromARGB(255, 255, 249, 230),
                 selectedSlotColor: Yellow,
                 bookingService: callServiceBooking!,
                 convertStreamResultToDateTimeRanges: convertStreamResultMock,

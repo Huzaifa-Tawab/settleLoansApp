@@ -19,16 +19,18 @@ final user = <String, dynamic>{
 
 class ClientDataScreen1 extends StatelessWidget {
   ClientDataScreen1({super.key});
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _PhoneController = TextEditingController();
-
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _PhoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     onButtonPressed() {
-      user['name'] = _nameController.text;
-      user['phoneNumber'] = _PhoneController.text;
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ClientDataScreen2()));
+      if (_formKey.currentState!.validate()) {
+        user['name'] = _nameController.text;
+        user['phoneNumber'] = _PhoneController.text;
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ClientDataScreen2()));
+      }
     }
 
     return Scaffold(
@@ -40,59 +42,74 @@ class ClientDataScreen1 extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Step 1 of 3',
-                      style: LabelTextStyle1(),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'Let us get to know you.',
-                      style: HeadingTextStyle2(),
-                    ),
-                  ],
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        'Step 1 of 3',
+                        style: LabelTextStyle1(),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Let us get to know you.',
+                        style: HeadingTextStyle2(),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              TextField_1(
-                controller: _nameController,
-                txttype: TextInputType.name,
-                label: 'Name',
-                hint: 'Name',
-              ),
-              SizedBox(
-                height: 35,
-              ),
-              TextField_1(
-                controller: _PhoneController,
-                txttype: TextInputType.number,
-                label: 'Phone No.',
-                hint: '91 XXXXXXXXXX',
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 60,
-                  child: RoundedButton1(
-                      text: 'Next Step', onPressed: onButtonPressed)),
-            ],
+                const SizedBox(
+                  height: 100,
+                ),
+                TextField_1(
+                  controller: _nameController,
+                  txttype: TextInputType.name,
+                  label: 'Name',
+                  hint: 'Name',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                TextField_1(
+                  controller: _PhoneController,
+                  txttype: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter phone number';
+                    }
+                    return null;
+                  },
+                  label: 'Phone No.',
+                  hint: '91 XXXXXXXXXX',
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 60,
+                    child: RoundedButton1(
+                        text: 'Next Step', onPressed: onButtonPressed)),
+              ],
+            ),
           ),
         ),
       ),
@@ -102,16 +119,19 @@ class ClientDataScreen1 extends StatelessWidget {
 
 class ClientDataScreen2 extends StatelessWidget {
   ClientDataScreen2({super.key});
-  TextEditingController _DebtController = TextEditingController();
-  TextEditingController _IncomeController = TextEditingController();
+  final TextEditingController _DebtController = TextEditingController();
+  final TextEditingController _IncomeController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     onButtonPressed() {
-      user['AmountOfDebt'] = _DebtController.text;
-      user['MonthlyIncome'] = _IncomeController.text;
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ClientDataScreen3()));
+      if (_formKey.currentState!.validate()) {
+        user['AmountOfDebt'] = _DebtController.text;
+        user['MonthlyIncome'] = _IncomeController.text;
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const ClientDataScreen3()));
+      }
     }
 
     return Scaffold(
@@ -123,59 +143,74 @@ class ClientDataScreen2 extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Text(
-                      'Step 2 of 3',
-                      style: LabelTextStyle1(),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'Help us understand you better.',
-                      style: HeadingTextStyle2(),
-                    ),
-                  ],
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        'Step 2 of 3',
+                        style: LabelTextStyle1(),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Help us understand you better.',
+                        style: HeadingTextStyle2(),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              TextField_1(
-                controller: _DebtController,
-                txttype: TextInputType.number,
-                label: 'Total Debt Amount',
-                hint: '50,000',
-              ),
-              SizedBox(
-                height: 35,
-              ),
-              TextField_1(
-                controller: _IncomeController,
-                txttype: TextInputType.number,
-                label: 'Monthly Income',
-                hint: '25,000',
-              ),
-              SizedBox(
-                height: 100,
-              ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 60,
-                  child: RoundedButton1(
-                      text: 'Next Step', onPressed: onButtonPressed)),
-            ],
+                const SizedBox(
+                  height: 100,
+                ),
+                TextField_1(
+                  controller: _DebtController,
+                  txttype: TextInputType.number,
+                  label: 'Total Debt Amount',
+                  hint: '50000',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter phone number';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 35,
+                ),
+                TextField_1(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter phone number';
+                    }
+                    return null;
+                  },
+                  controller: _IncomeController,
+                  txttype: TextInputType.number,
+                  label: 'Monthly Income',
+                  hint: '25000',
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 60,
+                    child: RoundedButton1(
+                        text: 'Next Step', onPressed: onButtonPressed)),
+              ],
+            ),
           ),
         ),
       ),
@@ -184,7 +219,7 @@ class ClientDataScreen2 extends StatelessWidget {
 }
 
 class ClientDataScreen3 extends StatefulWidget {
-  ClientDataScreen3({super.key});
+  const ClientDataScreen3({super.key});
 
   @override
   State<ClientDataScreen3> createState() => _ClientDataScreen3State();
@@ -219,7 +254,7 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
     setUserData();
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => ClientHome()),
+        MaterialPageRoute(builder: (context) => const ClientHome()),
         (Route<dynamic> route) => false);
   }
 
@@ -243,14 +278,14 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
                     Text(
                       'Step 3 of 3',
                       style: LabelTextStyle1(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
@@ -260,7 +295,7 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Text(
@@ -293,7 +328,7 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 35,
               ),
               Text(
@@ -327,7 +362,7 @@ class _ClientDataScreen3State extends State<ClientDataScreen3> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               SizedBox(

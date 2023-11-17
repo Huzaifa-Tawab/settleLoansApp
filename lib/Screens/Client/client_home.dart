@@ -112,10 +112,17 @@ class _ClientHomeState extends State<ClientHome> {
       gotdata = true;
 
       // value.data()?['Paid'];
-      setState(() {
-        userDetails = value.data()!;
-        print(userDetails);
-      });
+      if (value.data() != null) {
+        setState(() {
+          userDetails = value.data()!;
+          print(userDetails);
+        });
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
     });
   }
 
@@ -213,13 +220,13 @@ class _ClientHomeState extends State<ClientHome> {
                                   // onPressed: Schedule_A_Call_Handler,
                                   onPressed: () {
                                     getCurrentUserInfo();
-                                    showDataAlert(context);
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           const ScheduleACall()),
-                                    // );
+                                    // showDataAlert(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ScheduleACall()),
+                                    );
                                   },
                                   color: Colors.transparent,
                                 )
